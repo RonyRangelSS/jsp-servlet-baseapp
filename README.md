@@ -2,4 +2,4 @@
 
 ## Desenolvedores
 
-- Seu nome completo aqui;
+- Michael Albuquerque dos Santos (Atualizei o arquivo about.jsp, o arquivo readme.md e criei minha branch de desenvolvimento);
