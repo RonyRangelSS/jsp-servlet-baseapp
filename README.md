@@ -1,5 +1,5 @@
-# Escreva aqui o tema da equipe, por exemplo (App Universo, App Animais, App Comidas)
+# App de gerenciamento de tasks (To do list)
 
 ## Desenolvedores
 
-- Seu nome completo aqui;
+- Eloise Sophia Lamenha Lins;
