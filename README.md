@@ -1,5 +1,5 @@
 # App de gerenciamento de tasks (To do list)
 
-## Desenolvedores
+## Desenvolvedores
 
 - Eloise Sophia Lamenha Lins;
