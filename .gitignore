@@ -17,6 +17,7 @@ local.properties
 # Intellij
 .idea/
 
+
 # External tool builders
 .externalToolBuilders/
 
