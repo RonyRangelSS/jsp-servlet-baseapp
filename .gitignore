@@ -14,8 +14,12 @@ local.properties
 .loadpath
 .recommenders
 
+# Intellij
+.idea/
+
 # External tool builders
 .externalToolBuilders/
+
 
 # Locally stored "Eclipse launch configurations"
 *.launch
