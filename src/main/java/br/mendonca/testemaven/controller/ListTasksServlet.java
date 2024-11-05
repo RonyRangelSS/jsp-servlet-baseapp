@@ -23,10 +23,15 @@ public class ListTasksServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter page = response.getWriter();
+        HttpSession session = request.getSession();
+
 
         try {
+            UserDTO user = (UserDTO) session.getAttribute("user");
+            String userId = user.getUuid();
+
             TaskService taskService = new TaskService();
-            List<TaskDTO> lista = taskService.listAllUsersTasks();
+            List<TaskDTO> lista = taskService.listAllUserTasks(userId);
 
             // Anexa � requisi��o um objeto ArrayList e despacha a requisi��o para uma JSP.
             request.setAttribute("lista", lista);
@@ -60,13 +65,15 @@ public class ListTasksServlet extends HttpServlet {
         try {
 
             UserDTO user = (UserDTO) session.getAttribute("user");
+            String userId = user.getUuid();
 
 
             String taskName = request.getParameter("taskName");
+            Integer priority = Integer.valueOf(request.getParameter("priority"));
 
-            taskService.register(taskName, userId, false);
+            taskService.registerTask(taskName, priority, userId);
 
-            response.sendRedirect("dashboard.jsp");
+            response.sendRedirect("list-tasks.jsp");
 
         } catch (Exception e) {
             // Escreve as mensagens de Exception em uma p�gina de resposta.

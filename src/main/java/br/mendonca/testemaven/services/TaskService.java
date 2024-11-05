@@ -13,13 +13,14 @@ import br.mendonca.testemaven.services.dto.UserDTO;
 
 public class TaskService {
 
-    public void registerTask(String taskName, Integer priority) throws ClassNotFoundException, SQLException {
+    public void registerTask(String taskName, Integer priority, String userId) throws ClassNotFoundException, SQLException {
         TaskDAO dao = new TaskDAO();
 
         Task task = new Task();
         task.setTaskName(taskName);
         task.setCompleted(false);
         task.setPriority(priority);
+        task.setUserId(userId);
 
         dao.register(task);
     }
