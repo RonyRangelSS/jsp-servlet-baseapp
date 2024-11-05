@@ -1,7 +1,5 @@
 package br.mendonca.testemaven.controller.event;
 
-import br.mendonca.testemaven.dao.UserDAO;
-import br.mendonca.testemaven.model.entities.User;
 import br.mendonca.testemaven.services.EventService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

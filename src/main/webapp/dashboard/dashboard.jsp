@@ -39,6 +39,7 @@ if (session.getAttribute("user") != null) {
 						<li class="nav-item"><a class="nav-link" href="/dashboard/users">Users</a></li>
 						<li class="nav-item"><a class="nav-link" href="/dashboard/about.jsp">About</a></li>
 						<li class="nav-item"><a class="nav-link" href="/dashboard/add-event.jsp">Add Event</a></li>
+						<li class="nav-item"><a class="nav-link" href="/dashboard/events">Events</a></li>
 					</ul>
 					<span class="navbar-text">
 						<a class="btn btn-success" href="/auth/logoff">Logoff</a>

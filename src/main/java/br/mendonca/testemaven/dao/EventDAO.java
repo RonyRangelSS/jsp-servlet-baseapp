@@ -22,14 +22,15 @@ public class EventDAO {
 		ps.close();
 	}
 	
-	public List<Event> listAllEvent() throws ClassNotFoundException, SQLException {
+	public List<Event> listAllEvent(String userId) throws ClassNotFoundException, SQLException {
 		ArrayList<Event> lista = new ArrayList<Event>();
 		
 		Connection conn = ConnectionPostgres.getConexao();
 		conn.setAutoCommit(true);
-		
-		Statement st = conn.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM events");
+
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM events WHERE userId = ?");
+		ps.setObject(1,UUID.fromString(userId));
+		ResultSet rs = ps.executeQuery();
 		
 		while (rs.next()) {
 			Event event = new Event();

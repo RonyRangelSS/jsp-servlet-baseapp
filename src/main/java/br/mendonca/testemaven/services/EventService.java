@@ -22,11 +22,11 @@ public class EventService {
 		dao.register(event);
 	}
 	
-	public List<EventDTO> listAllEvent() throws ClassNotFoundException, SQLException {
+	public List<EventDTO> listAllEvent(String userId) throws ClassNotFoundException, SQLException {
 		ArrayList<EventDTO> resp = new ArrayList<EventDTO>();
 		
 		EventDAO dao = new EventDAO();
-		List<Event> lista = dao.listAllEvent();
+		List<Event> lista = dao.listAllEvent(userId);
 		
 		for (Event event : lista) {
 			resp.add(EventDTO.eventMapper(event));
