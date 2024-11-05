@@ -1,10 +1,11 @@
 package br.mendonca.testemaven.dao;
 
 import br.mendonca.testemaven.model.entities.Note;
+import br.mendonca.testemaven.model.entities.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class NoteDAO {
@@ -20,5 +21,31 @@ public class NoteDAO {
         ps.setBoolean(5, note.isDone());
         ps.execute();
         ps.close();
+    }
+
+    public List<Note> listAllNotesFromUser(String userId) throws ClassNotFoundException, SQLException {
+        ArrayList<Note> lista = new ArrayList<Note>();
+
+        Connection conn = ConnectionPostgres.getConexao();
+        conn.setAutoCommit(true);
+
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery("SELECT * FROM notes");
+
+        while (rs.next()) {
+            Note note = new Note();
+            note.setUuid(rs.getString("uuid"));
+            note.setUserId(rs.getString("userId"));
+            note.setNoteTitle(rs.getString("noteTitle"));
+            note.setNoteContent(rs.getString("noteContent"));
+            note.setDate(rs.getInt("date"));
+            note.setDone(rs.getBoolean("isDone"));
+
+            lista.add(note);
+        }
+
+        rs.close();
+
+        return lista;
     }
 }
