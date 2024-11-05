@@ -56,8 +56,9 @@
             List<NoteDTO> lista = (List<NoteDTO>) request.getAttribute("lista");
             for (NoteDTO note : lista) {
         %>
-        <tr href="<%= request.getContextPath() %>/dashboard/note/<%= note.getUuid() %>">
-            <td><%= note.getNoteTitle() %></td>
+        <tr>
+
+            <td><a href="/dashboard/note?note=<%= note.getUuid() %>"><%= note.getNoteTitle() %></a></td>
             <td>
                 <input type="checkbox" disabled <%= note.isDone() ? "checked" : "" %> />
             </td>

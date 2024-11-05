@@ -61,7 +61,6 @@
             <td>
                 <form action="<%= request.getContextPath() %>/deleteNote" method="post">
                     <input type="hidden" name="noteId" value="<%= note.getUuid() %>" />
-                    <button type="submit" class="btn btn-danger">Apagar</button>
                 </form>
             </td>
         </tr>
