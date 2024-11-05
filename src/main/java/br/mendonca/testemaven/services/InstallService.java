@@ -32,4 +32,19 @@ public class InstallService {
 					+ "    email VARCHAR(255) NOT NULL,"
 					+ "    password VARCHAR(255) NOT NULL)");
 	}
+
+	public void deleteTaskTable() throws ClassNotFoundException, SQLException {
+		statement("DROP TABLE IF EXISTS tasks");
+	}
+
+	public void createTaskTable() throws  ClassNotFoundException, SQLException {
+		statement("CREATE TABLE tasks ("
+				+ "    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,"
+				+ "    taskName VARCHAR(255) NOT NULL,"
+				+ "    isCompleted BOOLEAN,"
+				+ "    priority INTEGER"
+				+ ")");
+	}
+
+
 }
