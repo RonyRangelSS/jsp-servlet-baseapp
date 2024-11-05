@@ -27,12 +27,38 @@ public class InstallService {
 	
 	public void createUserTable() throws ClassNotFoundException, SQLException {
 		statement("CREATE TABLE users ("
-					+ "    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,"
+					+ "    uuid UUID PRIMARY KEY DEFAULT gen_random_uuid(),"
 					+ "    name VARCHAR(255) NOT NULL,"
 					+ "    email VARCHAR(255) NOT NULL,"
 					+ "    password VARCHAR(255) NOT NULL)");
 	}
 
+	public void deleteNoteTable() throws ClassNotFoundException, SQLException {
+		statement("DROP TABLE IF EXISTS notes");
+	}
+
+	public void createNoteTable() throws ClassNotFoundException, SQLException {
+		statement("CREATE TABLE notes ("
+				+ "    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,"
+				+ "    userId UUID REFERENCES users(uuid),"
+				+ "    noteTitle VARCHAR(255) NOT NULL,"
+				+ "    noteContent VARCHAR(255) NOT NULL,"
+				+ "    date INTEGER NOT NULL,"
+				+ "    isDone BOOLEAN NOT NULL)");
+	}
+
+	public void deleteEventTable() throws ClassNotFoundException, SQLException {
+		statement("DROP TABLE IF EXISTS events");
+	}
+
+	public void createEventTable() throws ClassNotFoundException, SQLException {
+		statement("CREATE TABLE events ("
+				+ "    uuid UUID PRIMARY KEY DEFAULT gen_random_uuid(),"
+				+ "    userId UUID REFERENCES users(uuid),"
+				+ "    eventName VARCHAR(255) NOT NULL,"
+				+ "    date INT NOT NULL,"
+				+ "    hasPassed BOOLEAN NOT NULL)");
+	}
 	public void deleteTaskTable() throws ClassNotFoundException, SQLException {
 		statement("DROP TABLE IF EXISTS tasks");
 	}
@@ -46,6 +72,5 @@ public class InstallService {
 				+ "    priority INTEGER"
 				+ ")");
 	}
-
 
 }

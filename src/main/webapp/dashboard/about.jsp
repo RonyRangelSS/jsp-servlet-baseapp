@@ -64,8 +64,8 @@ if (session.getAttribute("user") != null) {
 				</tr>
 				<tr>
 					<td scope="col">Michael Albuquerque dos Santos</th>
-					<td scope="col">Coloque aqui sua entidade de trabalho</th>
-					<td scope="col">Coloque aqui sua regra de negócio</th>
+					<td scope="col">Entiadade de trabalho: Notes</th>
+					<td scope="col">Construir uma anotação, visualizar as anotações feitas pelo usuario e visualizar uma note individualmente</th>
 				</tr>
 				<tr>
 					<td scope="col">Rony Rangel dos Santos Silva</th>
@@ -74,7 +74,7 @@ if (session.getAttribute("user") != null) {
 				</tr>
 				<tr>
 					<td scope="col">Eloise Sophia Lamenha Lins</th>
-					<td scope="col">Coloque aqui sua entidade de trabalho</th>
+					<td scope="col">Eventos</th>
 					<td scope="col">Coloque aqui sua regra de negócio</th>
 				</tr>
 			<tbody>
