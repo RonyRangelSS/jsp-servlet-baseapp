@@ -31,7 +31,7 @@
                     <li class="nav-item"><a class="nav-link" href="/dashboard/dashboard.jsp">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/dashboard/users">Users</a></li>
                     <li class="nav-item"><a class="nav-link" href="/dashboard/about.jsp">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/dashboard/about.jsp">Tasks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard/tasks">Tasks</a></li>
                 </ul>
                 <span class="navbar-text">
 						<a class="btn btn-success" href="/auth/logoff">Logoff</a>
@@ -61,10 +61,32 @@
             <td>Editar</td>
             <td><%= task.getTaskName() %></td>
             <td><%= task.getPriority() %></td>
-            <td><%= task. %></td>
+            <td><%= task.getCompleted() %></td>
             <td>Apagar</td>
         </tr>
         <% } %>
+
+            <form action="/dashboard/tasks" method="post">
+                <h1 class="h3 mb-3 fw-normal">Cadastrar nova task:</h1>
+                <div>
+                    <label for=>Nome da task:</label>
+                    <input type="text" name="taskName" class="form-control" id="floatingInput" placehholder="Digite sua task" />
+                    <label>Prioridade:</label>
+                    <input type="text" name="priority" class="form-control" placeholder="Digite a prioridade de sua task...">
+                    <label>Está feito ?</label>
+                    <select id="choice" name="isCompleted" required>
+                        <option value="true">Feito</option>
+                        <option value="false">Não feito</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary w-100 py-2 mt-2">Registrar task</button>
+                <br>
+                <br>
+
+                <span class="navbar-text">
+        </span>
+
+            </form>
         </tbody>
     </table>
 

@@ -14,7 +14,7 @@ public class TaskDAO {
         conn.setAutoCommit(true);
 
         PreparedStatement ps = conn.prepareStatement("INSERT INTO tasks (userId, taskName, isCompleted, priority) values (?,?,?, ?)");
-        ps.setString(1, task.getUserId());
+        ps.setObject(1, task.getUserId());
         ps.setString(2, task.getTaskName());
         ps.setBoolean(3, task.getCompleted());
         ps.setInt(4, task.getPriority());
@@ -28,20 +28,20 @@ public class TaskDAO {
         Connection conn = ConnectionPostgres.getConexao();
         conn.setAutoCommit(true);
 
-        PreparedStatement ps = conn.prepareStatement("SELECT * FROM tasks WHERE userId = ?");
-        ps.setObject(1, UUID.fromString(userId));
-        ResultSet rs = ps.executeQuery();
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery("SELECT * FROM tasks");
 
         while (rs.next()) {
             Task task = new Task();
             task.setUuid(rs.getString("uuid"));
             task.setTaskName(rs.getString("taskName"));
             task.setCompleted(rs.getBoolean("isCompleted"));
+            task.setPriority(rs.getInt("priority"));
             task.setUserId(rs.getString("userId"));
 
             lista.add(task);
         }
-
+        System.out.println(lista);
         rs.close();
 
         return lista;

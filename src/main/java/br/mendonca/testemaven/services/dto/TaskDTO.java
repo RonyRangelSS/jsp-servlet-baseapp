@@ -53,10 +53,11 @@ public class TaskDTO {
     public static TaskDTO taskMapper(Task task) {
         TaskDTO dto = new TaskDTO();
         dto.setUuid(task.getUuid());
+        dto.setUserId(task.getUserId());
         dto.setTaskName(task.getTaskName());
         dto.setPriority(task.getPriority());
         dto.setCompleted(task.getCompleted());
-        dto.setUserId(task.getUserId());
+
 
         return dto;
     }

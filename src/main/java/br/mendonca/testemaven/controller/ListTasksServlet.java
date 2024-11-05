@@ -29,9 +29,11 @@ public class ListTasksServlet extends HttpServlet {
         try {
             UserDTO user = (UserDTO) session.getAttribute("user");
             String userId = user.getUuid();
+            System.out.println(userId);
 
             TaskService taskService = new TaskService();
             List<TaskDTO> lista = taskService.listAllUserTasks(userId);
+            System.out.println(lista);
 
             // Anexa � requisi��o um objeto ArrayList e despacha a requisi��o para uma JSP.
             request.setAttribute("lista", lista);
@@ -59,7 +61,6 @@ public class ListTasksServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter page = response.getWriter();
         HttpSession session = request.getSession();
-        UserService userService = new UserService();
         TaskService taskService = new TaskService();
 
         try {
@@ -70,10 +71,14 @@ public class ListTasksServlet extends HttpServlet {
 
             String taskName = request.getParameter("taskName");
             Integer priority = Integer.valueOf(request.getParameter("priority"));
+            Boolean isCompleted = Boolean.valueOf(request.getParameter("isCompleted"));
 
-            taskService.registerTask(taskName, priority, userId);
+            taskService.registerTask(taskName, priority, isCompleted, userId);
 
-            response.sendRedirect("list-tasks.jsp");
+            List<TaskDTO> lista = taskService.listAllUserTasks(userId);
+
+            request.setAttribute("lista", lista);
+            request.getRequestDispatcher("list-tasks.jsp").forward(request, response);
 
         } catch (Exception e) {
             // Escreve as mensagens de Exception em uma p�gina de resposta.
@@ -90,3 +95,4 @@ public class ListTasksServlet extends HttpServlet {
 
         }
     }
+}

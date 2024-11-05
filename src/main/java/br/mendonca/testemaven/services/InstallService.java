@@ -40,6 +40,7 @@ public class InstallService {
 	public void createTaskTable() throws  ClassNotFoundException, SQLException {
 		statement("CREATE TABLE tasks ("
 				+ "    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,"
+				+ "    userId UUID REFERENCES users(uuid),"
 				+ "    taskName VARCHAR(255) NOT NULL,"
 				+ "    isCompleted BOOLEAN,"
 				+ "    priority INTEGER"
