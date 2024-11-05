@@ -61,7 +61,7 @@
             <td>Editar</td>
             <td><%= task.getTaskName() %></td>
             <td><%= task.getPriority() %></td>
-            <td><%= task.getCompleted() %></td>
+            <td><%= task. %></td>
             <td>Apagar</td>
         </tr>
         <% } %>
