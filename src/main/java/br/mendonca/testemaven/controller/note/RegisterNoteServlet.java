@@ -37,7 +37,7 @@ public class RegisterNoteServlet extends HttpServlet {
             String noteTitle = request.getParameter("noteTitle");
             String noteContent = request.getParameter("noteContent");
             int noteDate = Integer.parseInt(request.getParameter("noteDate"));
-            boolean isDone = Boolean.parseBoolean(request.getParameter("isDone"));
+            boolean isDone = request.getParameter("isDone") != null;
 
             noteService.register(userId, noteTitle, noteContent, noteDate, isDone);
 
