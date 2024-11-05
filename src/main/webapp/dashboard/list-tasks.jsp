@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
-<%@ page import="br.mendonca.testemaven.services.dto.UserDTO"%>
+<%@ page import="br.mendonca.testemaven.services.dto.TaskDTO"%>
 
 <% if (session.getAttribute("user") != null && request.getAttribute("lista") != null) { %>
 
@@ -31,6 +31,7 @@
                     <li class="nav-item"><a class="nav-link" href="/dashboard/dashboard.jsp">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/dashboard/users">Users</a></li>
                     <li class="nav-item"><a class="nav-link" href="/dashboard/about.jsp">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard/about.jsp">Tasks</a></li>
                 </ul>
                 <span class="navbar-text">
 						<a class="btn btn-success" href="/auth/logoff">Logoff</a>
@@ -41,25 +42,26 @@
 
 
 
-    <h1 class="h3 mb-3 fw-normal">Usuários</h1>
+    <h1 class="h3 mb-3 fw-normal">Tasks</h1>
     <table class="table">
         <thead>
         <tr>
             <th scope="col"></th>
-            <th scope="col">Nome</th>
-            <th scope="col">E-mail</th>
-            <th scope="col"></th>
+            <th scope="col">Nome da task</th>
+            <th scope="col">Prioridade</th>
+            <th scope="col">Foi feita ?</th>
         </tr>
         </thead>
         <tbody>
         <%
-            List<UserDTO> lista = (List<UserDTO>) request.getAttribute("lista");
-            for (UserDTO user : lista) {
+            List<TaskDTO> lista = (List<TaskDTO>) request.getAttribute("lista");
+            for (TaskDTO task : lista) {
         %>
         <tr>
             <td>Editar</td>
-            <td><%= user.getName() %></td>
-            <td><%= user.getEmail() %></td>
+            <td><%= task.getTaskName() %></td>
+            <td><%= task.getPriority() %></td>
+            <td><%= task.getCompleted() %></td>
             <td>Apagar</td>
         </tr>
         <% } %>
