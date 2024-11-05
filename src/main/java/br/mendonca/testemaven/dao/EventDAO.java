@@ -5,6 +5,7 @@ import br.mendonca.testemaven.model.entities.Event;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class EventDAO {
 
@@ -12,10 +13,11 @@ public class EventDAO {
 		Connection conn = ConnectionPostgres.getConexao();
 		conn.setAutoCommit(true);
 		
-		PreparedStatement ps = conn.prepareStatement("INSERT INTO events (eventName, date, hasPassed) values (?,?,?)");
-		ps.setString(1, event.getEventName());
-		ps.setInt(2, event.getDate());
-		ps.setBoolean(3, event.getHasPassed());
+		PreparedStatement ps = conn.prepareStatement("INSERT INTO events (userId, eventName, date, hasPassed) values (?,?,?,?)");
+		ps.setObject(1, UUID.fromString(event.getUserId()));
+		ps.setString(2, event.getEventName());
+		ps.setInt(3, event.getDate());
+		ps.setBoolean(4, event.getHasPassed());
 		ps.execute();
 		ps.close();
 	}
