@@ -40,6 +40,7 @@ public class InstallService {
 	public void createEventTable() throws ClassNotFoundException, SQLException {
 		statement("CREATE TABLE events ("
 				+ "    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,"
+				+ "    userId UUID REFERENCES users(uuid),"
 				+ "    eventName VARCHAR(255) NOT NULL,"
 				+ "    date INT NOT NULL,"
 				+ "    hasPassed BOOLEAN NOT NULL)");
