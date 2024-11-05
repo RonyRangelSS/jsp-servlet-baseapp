@@ -34,4 +34,13 @@ public class NoteService {
 
         return resp;
     }
+
+    public NoteDTO getNoteById(String noteId) throws ClassNotFoundException, SQLException {
+        NoteDAO dao = new NoteDAO();
+        Note note = dao.getNoteById(noteId);
+
+        return NoteDTO.noteMapper(note);
+    }
+
+
 }
