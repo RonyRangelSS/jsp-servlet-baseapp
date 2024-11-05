@@ -3,11 +3,10 @@ package br.mendonca.testemaven.services.dto;
 import br.mendonca.testemaven.model.entities.User;
 
 public class UserDTO {
-
 	private String uuid;
 	private String name;
 	private String email;
-	
+
 	public String getName() {
 		return name;
 	}
@@ -26,9 +25,9 @@ public class UserDTO {
 	
 	public static UserDTO userMapper(User user) {
 		UserDTO dto = new UserDTO();
+		dto.setUuid(user.getUuid());
 		dto.setName(user.getName());
 		dto.setEmail(user.getEmail());
-		dto.setUuid(user.getUuid());
 
 		return dto;
 	}
