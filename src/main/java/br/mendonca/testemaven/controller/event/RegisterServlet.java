@@ -25,7 +25,7 @@ public class RegisterServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		PrintWriter page = response.getWriter();
 		EventService eventService = new EventService();
 		
@@ -37,7 +37,7 @@ public class RegisterServlet extends HttpServlet {
 			
 			eventService.register(userId, eventName, date, hasPassed);
 
-			response.sendRedirect("dashboard.jsp");
+			response.sendRedirect("/dashboard/dashboard.jsp");
 			
 		} catch (Exception e) {
 			// Escreve as mensagens de Exception em uma p�gina de resposta.
