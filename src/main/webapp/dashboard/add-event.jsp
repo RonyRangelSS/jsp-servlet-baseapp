@@ -37,7 +37,7 @@ if (session.getAttribute("user") != null) {
 
 			<div>
 				<label>
-					<input type="checkbox" id="hasPassed" name="hasPassed">
+					<input type="checkbox" id="hasPassed" name="hasPassed" value="true">
 					Has the event passed?
 				</label>
 			</div>
