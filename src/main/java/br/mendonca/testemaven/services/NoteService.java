@@ -2,6 +2,11 @@ package br.mendonca.testemaven.services;
 
 import br.mendonca.testemaven.model.entities.Note;
 import br.mendonca.testemaven.dao.NoteDAO;
+import br.mendonca.testemaven.services.dto.NoteDTO;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NoteService {
     public void register(String userId, String noteTitle, String noteContent, int date, boolean isDone) throws ClassNotFoundException, SQLException {
@@ -17,4 +22,16 @@ public class NoteService {
         dao.register(note);
     }
 
+    public List<NoteDTO> listAllUserNotes(String userId) throws ClassNotFoundException, SQLException {
+        ArrayList<NoteDTO> resp = new ArrayList<NoteDTO>();
+
+        NoteDAO dao = new NoteDAO();
+        List<Note> lista = dao.listAllNotesFromUser(userId);
+
+        for (Note note : lista) {
+            resp.add(NoteDTO.taskMapper(note));
+        }
+
+        return resp;
+    }
 }
