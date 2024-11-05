@@ -67,6 +67,10 @@
         </tbody>
     </table>
 
+    <span class="navbar-text">
+          <a class="btn btn-success" href="/dashboard/dashboard.jsp">Dashboard</a>
+    </span>
+
 
 </main>
 

@@ -8,12 +8,14 @@ import java.util.List;
 import br.mendonca.testemaven.services.NoteService;
 import br.mendonca.testemaven.services.dto.NoteDTO;
 import br.mendonca.testemaven.services.dto.UserDTO;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+@WebServlet("/dashboard/notes")
 public class ListNotesServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
