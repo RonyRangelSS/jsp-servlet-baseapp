@@ -29,7 +29,7 @@ public class NoteService {
         List<Note> lista = dao.listAllNotesFromUser(userId);
 
         for (Note note : lista) {
-            resp.add(NoteDTO.taskMapper(note));
+            resp.add(NoteDTO.noteMapper(note));
         }
 
         return resp;
