@@ -1,7 +1,3 @@
-# App de gerenciamento de tasks (To do list)
-
-## Desenvolvedores
-
 ## Semana 1
 
 - Michael Albuquerque dos Santos (Atualizei o arquivo about.jsp, o arquivo readme.md e criei minha branch de desenvolvimento);
@@ -11,3 +7,4 @@
 Link da página do cliente: https://jsp-servlet-baseapp-4kbl.onrender.com
 
 ## Semana 2
+Link da página do cliente: https://jsp-servlet-baseapp-4kbl.onrender.com
