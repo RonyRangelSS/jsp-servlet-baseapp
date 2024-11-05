@@ -26,17 +26,28 @@ public class InstallDatabaseServlet extends HttpServlet {
 			service.testConnection();
 			msg += "<h2>Connection DB sucessful!</h2>\n";
 
+
 			service.deleteEventTable();
 			msg += "<h2>Delete table events sucessful!</h2>\n";
 
+
+			service.deleteTaskTable();
+			msg += "<h2>Delete table task sucessful!</h2>\n";
+
 			service.deleteUserTable();
 			msg += "<h2>Delete table user sucessful!</h2>\n";
+
 			
 			service.createUserTable();
 			msg += "<h2>Create table user sucessful!</h2>\n";
 
+
 			service.createEventTable();
 			msg += "<h2>Create table events sucessful!</h2>\n";
+
+			service.createTaskTable();
+			msg += "<h2>Create table user sucessful!</h2>\n";
+
 			
 			page.println("<html lang='pt-br'><head><title>Teste</title></head><body>");
 			page.println(msg);

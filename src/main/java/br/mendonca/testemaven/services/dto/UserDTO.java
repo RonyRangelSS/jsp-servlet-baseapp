@@ -3,8 +3,8 @@ package br.mendonca.testemaven.services.dto;
 import br.mendonca.testemaven.model.entities.User;
 
 public class UserDTO {
-	
 	private String uuid;
+
 	private String name;
 	private String email;
 

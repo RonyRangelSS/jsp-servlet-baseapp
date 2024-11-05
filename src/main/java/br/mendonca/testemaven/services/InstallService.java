@@ -33,6 +33,7 @@ public class InstallService {
 					+ "    password VARCHAR(255) NOT NULL)");
 	}
 
+
 	public void deleteEventTable() throws ClassNotFoundException, SQLException {
 		statement("DROP TABLE IF EXISTS events");
 	}
@@ -45,4 +46,19 @@ public class InstallService {
 				+ "    date INT NOT NULL,"
 				+ "    hasPassed BOOLEAN NOT NULL)");
 	}
+	public void deleteTaskTable() throws ClassNotFoundException, SQLException {
+		statement("DROP TABLE IF EXISTS tasks");
+	}
+
+	public void createTaskTable() throws  ClassNotFoundException, SQLException {
+		statement("CREATE TABLE tasks ("
+				+ "    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,"
+				+ "    userId UUID REFERENCES users(uuid),"
+				+ "    taskName VARCHAR(255) NOT NULL,"
+				+ "    isCompleted BOOLEAN,"
+				+ "    priority INTEGER"
+				+ ")");
+	}
+
+
 }
