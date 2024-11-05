@@ -24,11 +24,11 @@ public class TaskService {
         dao.register(task);
     }
 
-    public List<TaskDTO> listAllUsersTasks() throws ClassNotFoundException, SQLException {
+    public List<TaskDTO> listAllUserTasks(String userId) throws ClassNotFoundException, SQLException {
         ArrayList<TaskDTO> resp = new ArrayList<TaskDTO>();
 
         TaskDAO dao = new TaskDAO();
-        List<Task> lista = dao.listAllUserTasks();
+        List<Task> lista = dao.listAllUserTasks(userId);
 
         for (Task task : lista) {
             resp.add(TaskDTO.taskMapper(task));
@@ -36,4 +36,5 @@ public class TaskService {
 
         return resp;
     }
+
 }

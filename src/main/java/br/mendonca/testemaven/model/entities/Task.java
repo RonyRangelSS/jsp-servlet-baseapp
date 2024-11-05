@@ -3,6 +3,7 @@ package br.mendonca.testemaven.model.entities;
 public class Task {
 
     private String uuid;
+    private String userID;
     private String taskName;
     private Boolean isCompleted;
     private Integer priority;
@@ -13,6 +14,13 @@ public class Task {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+    public String getUserId() {
+        return userID;
+    }
+
+    public void setUserId(String userID) {
+        this.userID = userID;
     }
 
     public String getTaskName() {

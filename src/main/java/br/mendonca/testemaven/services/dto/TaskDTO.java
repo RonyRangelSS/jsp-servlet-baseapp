@@ -5,6 +5,7 @@ import br.mendonca.testemaven.model.entities.Task;
 public class TaskDTO {
 
     private String uuid;
+    private String userId;
     private String taskName;
     private Boolean isCompleted;
     private Integer priority;
@@ -15,6 +16,14 @@ public class TaskDTO {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getTaskName() {
@@ -47,6 +56,7 @@ public class TaskDTO {
         dto.setTaskName(task.getTaskName());
         dto.setPriority(task.getPriority());
         dto.setCompleted(task.getCompleted());
+        dto.setUserId(task.getUserId());
 
         return dto;
     }

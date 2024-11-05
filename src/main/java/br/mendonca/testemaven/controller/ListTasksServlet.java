@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/dashboard/tasks")
 public class ListTasksServlet extends HttpServlet {
@@ -48,35 +49,37 @@ public class ListTasksServlet extends HttpServlet {
     }
 
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter page = response.getWriter();
+        HttpSession session = request.getSession();
+        UserService userService = new UserService();
+        TaskService taskService = new TaskService();
 
         try {
-            // A programa��o do servlet deve ser colocada neste bloco try.
-            // Apague o conte�do deste bloco try e escreva seu c�digo.
-            String parametro = request.getParameter("nomeparametro");
 
-            page.println("Parametro: " + parametro);
-            page.close();
+            UserDTO user = (UserDTO) session.getAttribute("user");
 
+
+            String taskName = request.getParameter("taskName");
+
+            taskService.register(taskName, userId, false);
+
+            response.sendRedirect("dashboard.jsp");
 
         } catch (Exception e) {
             // Escreve as mensagens de Exception em uma p�gina de resposta.
-            // N�o apagar este bloco.
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             e.printStackTrace(pw);
 
             page.println("<html lang='pt-br'><head><title>Error</title></head><body>");
             page.println("<h1>Error</h1>");
-            page.println("<code>");
-            page.println(sw.toString());
-            page.println("</code>");
+            page.println("<code>" + sw.toString() + "</code>");
             page.println("</body></html>");
             page.close();
         } finally {
 
         }
     }
-}
