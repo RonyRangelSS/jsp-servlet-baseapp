@@ -3,27 +3,21 @@ package br.mendonca.testemaven.controller.note;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import br.mendonca.testemaven.services.NoteService;
+import br.mendonca.testemaven.services.dto.NoteDTO;
 import br.mendonca.testemaven.services.dto.UserDTO;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/dashboard/register-note")
-public class RegisterNoteServlet extends HttpServlet {
+public class ListNotesServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.sendRedirect("/dashboard/add-note.jsp");
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter page = response.getWriter();
         HttpSession session = request.getSession();
@@ -34,15 +28,10 @@ public class RegisterNoteServlet extends HttpServlet {
             UserDTO user = (UserDTO) session.getAttribute("user");
             String userId = user.getUuid();
 
-            String noteTitle = request.getParameter("noteTitle");
-            String noteContent = request.getParameter("noteContent");
-            int noteDate = Integer.parseInt(request.getParameter("noteDate"));
-            boolean isDone = Boolean.parseBoolean(request.getParameter("isDone"));
+            List<NoteDTO> lista = noteService.listAllUserNotes(userId);
 
-            noteService.register(userId, noteTitle, noteContent, noteDate, isDone);
-
-            response.sendRedirect("dashboard.jsp");
-
+            request.setAttribute("lista", lista);
+            request.getRequestDispatcher("list-notes.jsp").forward(request, response);
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
