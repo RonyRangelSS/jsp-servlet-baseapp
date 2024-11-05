@@ -32,4 +32,16 @@ public class InstallService {
 					+ "    email VARCHAR(255) NOT NULL,"
 					+ "    password VARCHAR(255) NOT NULL)");
 	}
+
+	public void deleteEventTable() throws ClassNotFoundException, SQLException {
+		statement("DROP TABLE IF EXISTS events");
+	}
+
+	public void createEventTable() throws ClassNotFoundException, SQLException {
+		statement("CREATE TABLE events ("
+				+ "    uuid UUID DEFAULT gen_random_uuid() PRIMARY KEY,"
+				+ "    eventName VARCHAR(255) NOT NULL,"
+				+ "    date INT NOT NULL,"
+				+ "    hasPassed BOOLEAN NOT NULL)");
+	}
 }
