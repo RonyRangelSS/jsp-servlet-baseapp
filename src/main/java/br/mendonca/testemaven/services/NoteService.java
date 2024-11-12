@@ -42,5 +42,18 @@ public class NoteService {
         return NoteDTO.noteMapper(note);
     }
 
+    public List<NoteDTO> listNotesForPagination(String userId, int maxNotesPerPage, int offset) throws ClassNotFoundException, SQLException {
+        ArrayList<NoteDTO> resp = new ArrayList<NoteDTO>();
+
+        NoteDAO dao = new NoteDAO();
+        List<Note> lista = dao.listNotesForPagination(userId, maxNotesPerPage, offset);
+
+        for (Note note : lista) {
+            resp.add(NoteDTO.noteMapper(note));
+        }
+
+        return resp;
+    }
+
 
 }
