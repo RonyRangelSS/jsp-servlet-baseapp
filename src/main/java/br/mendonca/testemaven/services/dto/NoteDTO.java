@@ -7,6 +7,7 @@ public class NoteDTO {
     private String userId;
     private String noteTitle;
     private String noteContent;
+    private boolean isVisible;
     private int date;
     private boolean isDone;
 
@@ -54,9 +55,15 @@ public class NoteDTO {
         return isDone;
     }
 
+    public boolean isVisible() {
+        return isVisible;
+    }
+
     public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
+
+    public void setVisible(boolean isVisible) {this.isVisible = isVisible; }
 
     public static NoteDTO noteMapper(Note note) {
         NoteDTO dto = new NoteDTO();
@@ -66,6 +73,7 @@ public class NoteDTO {
         dto.setNoteContent(note.getNoteContent());
         dto.setDate(note.getDate());
         dto.setDone(note.isDone());
+        dto.setVisible(note.isVisible());
 
         return dto;
     }

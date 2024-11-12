@@ -39,13 +39,12 @@
         </div>
     </nav>
 
-    <h1 class="h3 mb-3 fw-normal">Notes</h1>
+    <h1 class="h3 mb-3 fw-normal">Deleted notes</h1>
     <table class="table">
         <thead>
         <tr>
             <th scope="col">Note name</th>
             <th scope="col">Status</th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -57,17 +56,6 @@
             <td><a href="/dashboard/note?note=<%= note.getUuid() %>"><%= note.getNoteTitle() %></a></td>
             <td>
                 <input type="checkbox" disabled <%= note.isDone() ? "checked" : "" %> />
-            </td>
-            <td>
-                <form action="/dashboard/update-visibility" method="POST">
-                    <% int currentPageIndex = (int) request.getAttribute("currentPageIndex"); %>
-                    <input type="hidden" name="noteId" value="<%=note.getUuid() %>" />
-                    <input type="hidden" name="pageIndex" value="<%=currentPageIndex %>" />
-
-                    <button type="submit" class="btn btn-danger">
-                        Delete
-                    </button>
-                </form>
             </td>
         </tr>
         <% } %>
@@ -81,11 +69,11 @@
         %>
 
         <% if (currentPageIndex > 1) { %>
-        <a href="/dashboard/notes/page?pageIndex=<%= currentPageIndex - 1 %>" class="btn btn-primary">Previous</a>
+        <a href="/dashboard/notes/deleted?pageIndex=<%= currentPageIndex - 1 %>" class="btn btn-primary">Previous</a>
         <% } %>
 
         <% if (currentPageIndex < totalPages) { %>
-        <a href="/dashboard/notes/page?pageIndex=<%= currentPageIndex + 1 %>" class="btn btn-primary">Next</a>
+        <a href="/dashboard/notes/deleted?pageIndex=<%= currentPageIndex + 1 %>" class="btn btn-primary">Next</a>
         <% } %>
     </div>
 
