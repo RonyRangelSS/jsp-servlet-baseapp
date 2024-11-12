@@ -19,7 +19,7 @@
             <input type="text" name="noteDate" class="form-control" placehholder="Digite a data em que você fez essa anotação em numero de dias" />
             <input type="checkbox" name="isDone" class="form-check-input">
         </div>
-        <button class="btn btn-primary w-100 py-2 mt-2">Registrar task</button>
+        <button type='submit' class="btn btn-primary w-100 py-2 mt-2">Registrar anotação</button>
 
         <span class="navbar-text">
           <a class="btn btn-success" href="/dashboard/dashboard.jsp">Dashboard</a>
