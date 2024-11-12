@@ -1,8 +1,11 @@
 package br.mendonca.testemaven.services;
 
 import br.mendonca.testemaven.dao.EventDAO;
+import br.mendonca.testemaven.dao.NoteDAO;
 import br.mendonca.testemaven.model.entities.Event;
+import br.mendonca.testemaven.model.entities.Note;
 import br.mendonca.testemaven.services.dto.EventDTO;
+import br.mendonca.testemaven.services.dto.NoteDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -34,4 +37,12 @@ public class EventService {
 		
 		return resp;
 	}
+
+	public EventDTO getEventById(String eventId) throws ClassNotFoundException, SQLException {
+		EventDAO dao = new EventDAO();
+		Event event = dao.getEventById(eventId);
+
+		return EventDTO.eventMapper(event);
+	}
+
 }

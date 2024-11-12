@@ -1,6 +1,7 @@
 package br.mendonca.testemaven.dao;
 
 import br.mendonca.testemaven.model.entities.Event;
+import br.mendonca.testemaven.model.entities.Note;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -45,6 +46,29 @@ public class EventDAO {
 		rs.close();
 		
 		return lista;
+	}
+
+	public Event getEventById(String eventId) throws ClassNotFoundException, SQLException {
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM events WHERE uuid = ?");
+		ps.setObject(1, UUID.fromString(eventId));
+		ResultSet rs = ps.executeQuery();
+
+		Event event = new Event();
+
+		while (rs.next()) {
+			event.setUuid(rs.getString("uuid"));
+			event.setUserId(rs.getString("userId"));
+			event.setEventName(rs.getString("eventName"));
+			event.setDate(rs.getInt("date"));
+			event.setHasPassed(rs.getBoolean("hasPassed"));
+		}
+
+		rs.close();
+
+		return event;
 	}
 
 }
