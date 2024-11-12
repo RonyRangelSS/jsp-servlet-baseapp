@@ -56,6 +56,9 @@ public class InstallDatabaseServlet extends HttpServlet {
 			service.populateNotes();
 			msg += "<h2>Populate table notes sucessful!</h2>\n";
 
+			service.populateEvents();
+			msg += "<h2>Populate table events sucessful!</h2>\n";
+
 			page.println("<html lang='pt-br'><head><title>Teste</title></head><body>");
 			page.println(msg);
 			/*/

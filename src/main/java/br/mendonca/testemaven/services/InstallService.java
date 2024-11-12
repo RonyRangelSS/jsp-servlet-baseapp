@@ -58,7 +58,7 @@ public class InstallService {
 				+ "    uuid UUID PRIMARY KEY DEFAULT gen_random_uuid(),"
 				+ "    userId UUID REFERENCES users(uuid),"
 				+ "    eventName VARCHAR(255) NOT NULL,"
-				+ "    date INT NOT NULL,"
+				+ "    date INTEGER NOT NULL,"
 				+ "    hasPassed BOOLEAN NOT NULL)");
 	}
 	public void deleteTaskTable() throws ClassNotFoundException, SQLException {
@@ -111,6 +111,28 @@ public class InstallService {
 					"INSERT INTO notes (userId, noteTitle, noteContent, date, isDone) " +
 							"VALUES ('%s', '%s', '%s', %d, %b)",
 					users.get(0).getUuid(), titles[i], contents[i], dates[i], isDoneStatus[i]
+			);
+			statement(sql);
+		}
+	}
+
+	public void populateEvents() throws ClassNotFoundException, SQLException {
+		String[] eventName = {
+				"Evento 1", "Evento 2", "Evento 3", "Evento 4", "Evento 5",
+				"Evento 6", "Evento 7"
+		};
+
+		UserService userService = new UserService();
+		List<UserDTO> users = userService.listAllUsers();
+
+		int[] dates = {01012024, 02012024, 03012025, 04012025, 05012025, 06012024, 07012025};
+		boolean[] hasPassed = {true, true, false, false, false, true, false};
+
+		for (int i = 0; i < 7; i++) {
+			String sql = String.format(
+					"INSERT INTO events (userId, eventName, date, hasPassed) " +
+							"VALUES ('%s','%s', %d, %b)",
+					users.get(0).getUuid(), eventName[i], dates[i], hasPassed[i]
 			);
 			statement(sql);
 		}
