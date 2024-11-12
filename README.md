@@ -13,5 +13,8 @@ Link da página do cliente: https://jsp-servlet-baseapp-4kbl.onrender.com
 <<<<<<< HEAD
 =======
 
+## Semana 3
+
+-Michael Albuquerque dos Santos (Criei o código pra iniciar um usuário no momento de install e popular a tabela notes)
 
 >>>>>>> development
