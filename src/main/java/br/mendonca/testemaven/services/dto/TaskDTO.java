@@ -8,6 +8,7 @@ public class TaskDTO {
     private String userId;
     private String taskName;
     private Boolean isCompleted;
+    private Boolean isVisible;
     private Integer priority;
 
     public String getUuid() {
@@ -40,6 +41,14 @@ public class TaskDTO {
 
     public void setCompleted(Boolean completed) {
         isCompleted = completed;
+    }
+
+    public Boolean getVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(Boolean visible) {
+        isVisible = visible;
     }
 
     public Integer getPriority() {

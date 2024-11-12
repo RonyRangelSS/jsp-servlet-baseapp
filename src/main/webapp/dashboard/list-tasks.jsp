@@ -40,44 +40,23 @@
         </div>
     </nav>
 
-
-
-    <h1 class="h3 mb-3 fw-normal">Tasks</h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col"></th>
-            <th scope="col">Nome da task</th>
-            <th scope="col">Prioridade</th>
-            <th scope="col">Foi feita ?</th>
-        </tr>
-        </thead>
-        <tbody>
-        <%
-            List<TaskDTO> lista = (List<TaskDTO>) request.getAttribute("lista");
-            for (TaskDTO task : lista) {
-        %>
-        <tr>
-            <td>Editar</td>
-            <td><%= task.getTaskName() %></td>
-            <td><%= task.getPriority() %></td>
-            <td><%= task.getCompleted() %></td>
-            <td>Apagar</td>
-        </tr>
-        <% } %>
-
+    <div class="d-flex flex-row h-auto">
+        <div d-flex flex-col col-md-4 me-5>
             <form action="/dashboard/tasks" method="post">
-                <h1 class="h3 mb-3 fw-normal">Cadastrar nova task:</h1>
+                <h1 class="h3 mb-3 fw-normal">Cadastrar nova task</h1>
                 <div>
                     <label for=>Nome da task:</label>
                     <input type="text" name="taskName" class="form-control" id="floatingInput" placehholder="Digite sua task" />
+                    <br/>
                     <label>Prioridade:</label>
                     <input type="text" name="priority" class="form-control" placeholder="Digite a prioridade de sua task...">
+                    <br/>
                     <label>Está feito ?</label>
                     <select id="choice" name="isCompleted" required>
                         <option value="true">Feito</option>
                         <option value="false">Não feito</option>
                     </select>
+                    <br/>
                 </div>
                 <button class="btn btn-primary w-100 py-2 mt-2">Registrar task</button>
                 <br>
@@ -87,8 +66,63 @@
         </span>
 
             </form>
-        </tbody>
-    </table>
+
+        </div>
+
+        <div class="d-flex flex-column col-md-5 ms-5">
+            <h1 class="h3 mb-3 fw-normal">Tasks</h1>
+            <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Nome da task</th>
+                        <th scope="col">Prioridade</th>
+                        <th scope="col">Foi feita ?</th>
+                        <th scope="col">Visível ? ?</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                List<TaskDTO> lista = (List<TaskDTO>) request.getAttribute("lista");
+                for (TaskDTO task : lista) {
+                        %>
+                    <tr>
+                        <td>Editar</td>
+                        <td><%= task.getTaskName() %></td>
+                        <td><%= task.getPriority() %></td>
+                        <td><%= task.getCompleted() %></td>
+                        <form method="post">
+                            <input type="hidden" name="taskId" value="<%= task.getUuid() %>" />
+                            <td><button formaction="/dashboard/ocultar-task">Ocultar</button></td>
+                        </form>
+                    </tr>
+                        <% } %>
+                    <tbody/>
+            <table/>
+            <div class="pagination">
+                <% int currentPage = (int) request.getAttribute("currentPage"); %>
+                <nav aria-label="Navegação de página">
+                    <ul class="pagination">
+                        <li class="page-item <%= currentPage == 1 ? "disabled" : "" %>">
+                            <a class="page-link" href="?page=<%= currentPage - 1 %>">Anterior</a>
+                        </li>
+                        <li class="page-item">
+                            <span class="page-link"><%= currentPage %></span>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<%= currentPage + 1 %>">Próxima</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <form method="post">
+                <button formaction="/dashboard/show-tasks">Mostrar todas as tasks</button>
+            </form>
+        </div>
+    </div>
+
+
+
 
 
 </main>

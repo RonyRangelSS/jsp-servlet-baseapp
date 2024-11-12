@@ -1,10 +1,11 @@
-package br.mendonca.testemaven.controller;
+package br.mendonca.testemaven.controller.task;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
+import br.mendonca.testemaven.model.entities.Task;
 import br.mendonca.testemaven.services.TaskService;
 import br.mendonca.testemaven.services.UserService;
 import br.mendonca.testemaven.services.dto.TaskDTO;
@@ -16,8 +17,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/dashboard/tasks")
-public class ListTasksServlet extends HttpServlet {
+@WebServlet("/dashboard/show-tasks")
+public class ShowAllTasks extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,18 +26,25 @@ public class ListTasksServlet extends HttpServlet {
         PrintWriter page = response.getWriter();
         HttpSession session = request.getSession();
 
-
         try {
             UserDTO user = (UserDTO) session.getAttribute("user");
             String userId = user.getUuid();
             System.out.println(userId);
 
+            int pageTask = 1;
+            if (request.getParameter("page") != null) {
+                pageTask = Integer.parseInt(request.getParameter("page"));
+            }
+
+            int offset = (pageTask - 1) * 3;
+
             TaskService taskService = new TaskService();
-            List<TaskDTO> lista = taskService.listAllUserTasks(userId);
-            System.out.println(lista);
+            List<TaskDTO> lista = taskService.listAllUserTasksPagineted(userId, offset);
+            System.out.println(lista.size());
 
             // Anexa � requisi��o um objeto ArrayList e despacha a requisi��o para uma JSP.
             request.setAttribute("lista", lista);
+            request.setAttribute("currentPage", pageTask);
             request.getRequestDispatcher("list-tasks.jsp").forward(request, response);
         } catch (Exception e) {
             // Escreve as mensagens de Exception em uma p�gina de resposta.
@@ -68,16 +76,24 @@ public class ListTasksServlet extends HttpServlet {
             UserDTO user = (UserDTO) session.getAttribute("user");
             String userId = user.getUuid();
 
+            int pageTask = 1;
+            int tasksPerPage = 3;
 
-            String taskName = request.getParameter("taskName");
-            Integer priority = Integer.valueOf(request.getParameter("priority"));
-            Boolean isCompleted = Boolean.valueOf(request.getParameter("isCompleted"));
+            if (request.getParameter("page") != null) {
+                pageTask = Integer.parseInt(request.getParameter("page"));
+            }
 
-            taskService.registerTask(taskName, priority, isCompleted, userId);
+            int offset = (pageTask - 1) * tasksPerPage;
 
-            List<TaskDTO> lista = taskService.listAllUserTasks(userId);
+    
+
+
+            taskService.ShowAllTasks(userId);
+
+            List<TaskDTO> lista = taskService.listAllUserTasksPagineted(userId, offset);
 
             request.setAttribute("lista", lista);
+            request.setAttribute("currentPage", pageTask);
             request.getRequestDispatcher("list-tasks.jsp").forward(request, response);
 
         } catch (Exception e) {
