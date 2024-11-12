@@ -3,6 +3,7 @@ package br.mendonca.testemaven.controller.install;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.UUID;
 
 import br.mendonca.testemaven.services.InstallService;
 import jakarta.servlet.ServletException;
@@ -49,6 +50,11 @@ public class InstallDatabaseServlet extends HttpServlet {
 
 			service.createTaskTable();
 			msg += "<h2>Create table user sucessful!</h2>\n";
+
+			UUID userId = service.createSingleUser("Fernando", "fernando@gmail.com", "1234");
+			msg += "<h2>Create user sucessful! Your id is </h2>\n" + userId;
+
+			service.createTasksForUser(userId);
 
 			page.println("<html lang='pt-br'><head><title>Teste</title></head><body>");
 			page.println(msg);
