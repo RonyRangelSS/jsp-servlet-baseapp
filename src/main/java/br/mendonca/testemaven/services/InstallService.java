@@ -75,25 +75,17 @@ public class InstallService {
 				+ ")");
 	}
 
-	public void populateUsers() throws ClassNotFoundException, SQLException {
-		String[] names = {"Michael", "Sophia", "Rony", "Michelle", "Giselle", "Beatriz", "Carol"};
+	public void insertInitialUser() throws ClassNotFoundException, SQLException {
 		String[] emails = {
-				"michael@hotmail.com",
-				"sophia@example.com",
-				"rony@example.com",
-				"michelle@example.com",
-				"giselle@example.com",
-				"beatriz@example.com",
-				"carol@example.com",
+				"michael-alb@hotmail.com",
 		};
 
-		for (int i = 0; i < 7; i++) {
-			String sql = String.format(
-					"INSERT INTO users (name, email, password) VALUES ('%s', '%s', '%s')",
-					names[i], emails[i], "123"
-			);
-			statement(sql);
-		}
+		String sql = String.format(
+				"INSERT INTO users (name, email, password) VALUES ('%s', '%s', '%s')",
+				"michael", "michael-alb@hotmail.com", "123"
+		);
+
+		statement(sql);
 	}
 
 	public void populateNotes() throws ClassNotFoundException, SQLException {
@@ -111,11 +103,6 @@ public class InstallService {
 		UserService userService = new UserService();
 		List<UserDTO> users = userService.listAllUsers();
 
-		String[] userIds = new String[7];
-		for (int i = 0; i < 7; i++) {
-			userIds[i] = users.get(i).getUuid();
-		}
-
 		int[] dates = {20241101, 20241102, 20241103, 20241104, 20241105, 20241106, 20241107};
 		boolean[] isDoneStatus = {false, true, false, true, false, true, false};
 
@@ -123,7 +110,7 @@ public class InstallService {
 			String sql = String.format(
 					"INSERT INTO notes (userId, noteTitle, noteContent, date, isDone) " +
 							"VALUES ('%s', '%s', '%s', %d, %b)",
-					userIds[i], titles[i], contents[i], dates[i], isDoneStatus[i]
+					users.get(0).getUuid(), titles[i], contents[i], dates[i], isDoneStatus[i]
 			);
 			statement(sql);
 		}

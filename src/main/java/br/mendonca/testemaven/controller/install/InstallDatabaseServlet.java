@@ -50,8 +50,8 @@ public class InstallDatabaseServlet extends HttpServlet {
 			service.createTaskTable();
 			msg += "<h2>Create table user sucessful!</h2>\n";
 
-			service.populateUsers();
-			msg += "<h2>Populate table users sucessful!</h2>\n";
+			service.insertInitialUser();
+			msg += "<h2>Initial user created sucessfully!</h2>\n";
 
 			service.populateNotes();
 			msg += "<h2>Populate table notes sucessful!</h2>\n";
