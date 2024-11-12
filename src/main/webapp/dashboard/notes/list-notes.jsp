@@ -33,13 +33,11 @@
                     <li class="nav-item"><a class="nav-link" href="/dashboard/about.jsp">About</a></li>
                 </ul>
                 <span class="navbar-text">
-						<a class="btn btn-success" href="/auth/logoff">Logoff</a>
-					</span>
+                    <a class="btn btn-success" href="/auth/logoff">Logoff</a>
+                </span>
             </div>
         </div>
     </nav>
-
-
 
     <h1 class="h3 mb-3 fw-normal">Notes</h1>
     <table class="table">
@@ -55,7 +53,6 @@
             for (NoteDTO note : lista) {
         %>
         <tr>
-
             <td><a href="/dashboard/note?note=<%= note.getUuid() %>"><%= note.getNoteTitle() %></a></td>
             <td>
                 <input type="checkbox" disabled <%= note.isDone() ? "checked" : "" %> />
@@ -65,14 +62,26 @@
         </tbody>
     </table>
 
+    <div class="d-flex justify-content-between">
+        <%
+            int currentPageIndex = (int) request.getAttribute("currentPageIndex");
+            int totalPages = (int) request.getAttribute("totalPages");
+        %>
+
+        <% if (currentPageIndex > 1) { %>
+        <a href="/dashboard/notes/page?pageIndex=<%= currentPageIndex - 1 %>" class="btn btn-primary">Previous</a>
+        <% } %>
+
+        <% if (currentPageIndex < totalPages) { %>
+        <a href="/dashboard/notes/page?pageIndex=<%= currentPageIndex + 1 %>" class="btn btn-primary">Next</a>
+        <% } %>
+    </div>
+
     <span class="navbar-text">
           <a class="btn btn-success" href="/dashboard/dashboard.jsp">Dashboard</a>
     </span>
 
-
 </main>
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
