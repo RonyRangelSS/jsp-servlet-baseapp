@@ -10,6 +10,7 @@
 - Michael Albuquerque dos Santos (Criei entidade notes. O usuario consegue inserir uma note, listar suas notes e visualizar uma note especifica. Criei DTO, DAO, Service, endpoints e JSP pra isso.)
 
 ## Semana 3
+- Michael Albuquerque dos Santos (Criei o código pra iniciar um usuário no momento de install e popular a tabela notes)
 - Eloise Sophia Lamenha Lins (Fiz com que todo usuário inicie sua conta com 7 eventos já cadastrados)
 - Michael Albuquerque dos Santos (Criei o código pra iniciar um usuário no momento de install e popular a tabela notes)
 

@@ -48,8 +48,6 @@
 				<tr>
 					<th scope="col"></th>
 					<th scope="col">Nome</th>
-					<th scope="col">Data</th>
-					<th scope="col">Já passou</th>
 					<th scope="col"></th>
 				</tr>
 			</thead>
@@ -60,9 +58,11 @@
 			%>
 			<tr>
 				<td>Editar</td>
-				<td><%= event.getEventName() %></td>
-				<td><%= event.getDate() %></td>
-				<td><%= event.getHasPassed() %></td>
+				<td>
+					<a href="view-event.jsp?eventId=<%=event.getUuid()%>" class="text-decoration-none">
+						<%= event.getEventName() %>
+					</a>
+				</td>
 				<td>Apagar</td>
 			</tr>
 			<% } %>
