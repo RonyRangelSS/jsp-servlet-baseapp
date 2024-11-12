@@ -73,4 +73,37 @@ public class NoteDAO {
 
         return note;
     }
+
+    public List<Note> listNotesForPagination(String userId, int maxNotesPerPage, int offset) throws ClassNotFoundException, SQLException {
+        ArrayList<Note> lista = new ArrayList<Note>();
+
+        Connection conn = ConnectionPostgres.getConexao();
+        conn.setAutoCommit(true);
+
+        Statement st = conn.createStatement();
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM notes  WHERE userId = ?  LIMIT ? OFFSET ?");
+        ps.setObject(1, UUID.fromString(userId));
+        ps.setInt(2, maxNotesPerPage);
+        ps.setInt(3, offset);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Note note = new Note();
+            note.setUuid(rs.getString("uuid"));
+            note.setUserId(rs.getString("userId"));
+            note.setNoteTitle(rs.getString("noteTitle"));
+            note.setNoteContent(rs.getString("noteContent"));
+            note.setDate(rs.getInt("date"));
+            note.setDone(rs.getBoolean("isDone"));
+
+            lista.add(note);
+        }
+
+        rs.close();
+
+        return lista;
+    }
+
+
+
 }

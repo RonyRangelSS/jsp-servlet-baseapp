@@ -3,6 +3,7 @@ package br.mendonca.testemaven.controller.note;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.mendonca.testemaven.services.NoteService;
@@ -15,7 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/dashboard/notes")
+@WebServlet("/dashboard/notes/page")
 public class ListNotesServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -24,6 +25,9 @@ public class ListNotesServlet extends HttpServlet {
         PrintWriter page = response.getWriter();
         HttpSession session = request.getSession();
         NoteService noteService = new NoteService();
+
+        int currentPageIndex = 1;
+        int maxNotesPerPage = 3;
 
         try {
 
