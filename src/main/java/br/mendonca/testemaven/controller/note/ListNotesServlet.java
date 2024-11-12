@@ -26,17 +26,23 @@ public class ListNotesServlet extends HttpServlet {
         HttpSession session = request.getSession();
         NoteService noteService = new NoteService();
 
-        int currentPageIndex = 1;
+
+        int currentPageIndex = Integer.parseInt(request.getParameter("pageIndex"));
         int maxNotesPerPage = 3;
+        int offset = (currentPageIndex - 1) * maxNotesPerPage;
 
         try {
 
             UserDTO user = (UserDTO) session.getAttribute("user");
             String userId = user.getUuid();
+            int totalPages = (int) Math.ceil((double) noteService.countUserNotes(userId) / maxNotesPerPage);
 
-            List<NoteDTO> lista = noteService.listAllUserNotes(userId);
+
+            List<NoteDTO> lista = noteService.listNotesForPagination(userId, maxNotesPerPage, offset);
 
             request.setAttribute("lista", lista);
+            request.setAttribute("totalPages", totalPages);
+            request.setAttribute("currentPageIndex", currentPageIndex);
             request.getRequestDispatcher("list-notes.jsp").forward(request, response);
         } catch (Exception e) {
             StringWriter sw = new StringWriter();

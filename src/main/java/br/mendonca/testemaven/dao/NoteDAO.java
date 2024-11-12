@@ -104,6 +104,29 @@ public class NoteDAO {
         return lista;
     }
 
+    public int countUserNotes(String userId) throws ClassNotFoundException, SQLException {
+        int count = 0;
+
+        Connection conn = ConnectionPostgres.getConexao();
+        conn.setAutoCommit(true);
+
+        Statement st = conn.createStatement();
+        PreparedStatement ps = conn.prepareStatement("SELECT COUNT(*) FROM notes WHERE userId = ?");
+        ps.setObject(1, UUID.fromString(userId));
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            count = rs.getInt(1);
+        }
+
+        rs.close();
+
+        return count;
+    }
+
+
+
+
 
 
 }

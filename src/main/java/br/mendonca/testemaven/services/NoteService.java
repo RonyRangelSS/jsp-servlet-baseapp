@@ -55,5 +55,12 @@ public class NoteService {
         return resp;
     }
 
+    public int countUserNotes(String userId) throws ClassNotFoundException, SQLException {
+        NoteDAO dao = new NoteDAO();
+        int count = dao.countUserNotes(userId);
+
+        return count;
+    }
+
 
 }
