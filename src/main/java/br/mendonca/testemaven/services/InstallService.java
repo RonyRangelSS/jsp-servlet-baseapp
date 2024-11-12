@@ -46,8 +46,10 @@ public class InstallService {
 				+ "    noteTitle VARCHAR(255) NOT NULL,"
 				+ "    noteContent VARCHAR(255) NOT NULL,"
 				+ "    date INTEGER NOT NULL,"
+				+ "    isVisible BOOLEAN NOT NULL DEFAULT TRUE,"
 				+ "    isDone BOOLEAN NOT NULL)");
 	}
+
 
 	public void deleteEventTable() throws ClassNotFoundException, SQLException {
 		statement("DROP TABLE IF EXISTS events");

@@ -14,12 +14,13 @@ public class NoteDAO {
         Connection conn = ConnectionPostgres.getConexao();
         conn.setAutoCommit(true);
 
-        PreparedStatement ps = conn.prepareStatement("INSERT INTO notes (userId, noteTitle, noteContent, date, isDone) values (?,?,?,?,?)");
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO notes (userId, noteTitle, noteContent, date, isDone, isVisible) values (?,?,?,?,?,?)");
         ps.setObject(1, UUID.fromString(note.getUserId()));
         ps.setString(2, note.getNoteTitle());
         ps.setString(3, note.getNoteContent());
         ps.setInt(4, note.getDate());
         ps.setBoolean(5, note.isDone());
+        ps.setBoolean(6, note.isVisible());
         ps.execute();
         ps.close();
     }
@@ -41,6 +42,7 @@ public class NoteDAO {
             note.setNoteContent(rs.getString("noteContent"));
             note.setDate(rs.getInt("date"));
             note.setDone(rs.getBoolean("isDone"));
+            note.setVisible(rs.getBoolean("isVisible"));
 
             lista.add(note);
         }
@@ -67,6 +69,7 @@ public class NoteDAO {
             note.setNoteContent(rs.getString("noteContent"));
             note.setDate(rs.getInt("date"));
             note.setDone(rs.getBoolean("isDone"));
+            note.setVisible(rs.getBoolean("isVisible"));
         }
 
         rs.close();
@@ -95,6 +98,7 @@ public class NoteDAO {
             note.setNoteContent(rs.getString("noteContent"));
             note.setDate(rs.getInt("date"));
             note.setDone(rs.getBoolean("isDone"));
+            note.setVisible(rs.getBoolean("isVisible"));
 
             lista.add(note);
         }
