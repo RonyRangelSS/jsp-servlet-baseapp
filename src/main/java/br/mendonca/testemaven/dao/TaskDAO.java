@@ -20,6 +20,10 @@ public class TaskDAO {
         ps.setInt(5, task.getPriority());
         ps.execute();
         ps.close();
+
+        System.out.println("#######################################");
+        System.out.println(task.getUserId());
+        System.out.println("#######################################");
     }
 
     public List<Task> listAllUserTasks(String userId) throws ClassNotFoundException, SQLException {
@@ -48,17 +52,16 @@ public class TaskDAO {
         return lista;
     }
 
-    public ArrayList<Task> listTasksPaginated(String userId, int offset, int limit) throws ClassNotFoundException, SQLException {
+    public ArrayList<Task> listTasksPaginated(String userId, int offset) throws ClassNotFoundException, SQLException {
         ArrayList<Task> lista = new ArrayList<Task>();
 
         Connection conn = ConnectionPostgres.getConexao();
         conn.setAutoCommit(true);
 
         Statement st = conn.createStatement();
-        PreparedStatement ps = conn.prepareStatement("SELECT * FROM tasks  WHERE userId = ?  LIMIT ? OFFSET ?");
-        ps.setObject(1, UUID.fromString(userId));
-        ps.setInt(2, limit);
-        ps.setInt(3, offset);
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM tasks WHERE isVisible=true LIMIT 3 OFFSET ?");
+        //ps.setObject(1, UUID.fromString(userId));
+        ps.setInt(1, offset);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
@@ -69,6 +72,8 @@ public class TaskDAO {
             task.setVisible(rs.getBoolean("isVisible"));
             task.setPriority(rs.getInt("priority"));
             task.setUserId(rs.getString("userId"));
+
+            System.out.println(rs.getString("taskName"));
 
             lista.add(task);
         }

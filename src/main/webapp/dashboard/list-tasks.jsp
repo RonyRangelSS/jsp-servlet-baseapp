@@ -91,7 +91,6 @@
                         <td><%= task.getTaskName() %></td>
                         <td><%= task.getPriority() %></td>
                         <td><%= task.getCompleted() %></td>
-                        <td><%= task.getVisible()%></td>
                         <form method="post">
                             <input type="hidden" name="taskId" value="<%= task.getUuid() %>" />
                             <td><button formaction="/dashboard/ocultar-task">Ocultar</button></td>
@@ -101,9 +100,7 @@
                     <tbody/>
             <table/>
             <div class="pagination">
-                <%
-                    int currentPage = (int) request.getAttribute("currentPage");
-                %>
+                <% int currentPage = (int) request.getAttribute("currentPage"); %>
                 <nav aria-label="Navegação de página">
                     <ul class="pagination">
                         <li class="page-item <%= currentPage == 1 ? "disabled" : "" %>">

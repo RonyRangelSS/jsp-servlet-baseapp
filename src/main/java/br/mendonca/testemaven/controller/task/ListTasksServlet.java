@@ -25,26 +25,21 @@ public class ListTasksServlet extends HttpServlet {
         PrintWriter page = response.getWriter();
         HttpSession session = request.getSession();
 
-
         try {
             UserDTO user = (UserDTO) session.getAttribute("user");
             String userId = user.getUuid();
             System.out.println(userId);
 
             int pageTask = 1;
-            int tasksPerPage = 3;
-
             if (request.getParameter("page") != null) {
                 pageTask = Integer.parseInt(request.getParameter("page"));
             }
 
-            int offset = (pageTask - 1) * tasksPerPage;
-
-            System.out.println(userId);
+            int offset = (pageTask - 1) * 3;
 
             TaskService taskService = new TaskService();
-            List<TaskDTO> lista = taskService.listAllUserTasksPagineted(userId, offset, 3);
-            System.out.println(lista);
+            List<TaskDTO> lista = taskService.listAllUserTasksPagineted(userId, offset);
+            System.out.println(lista.size());
 
             // Anexa � requisi��o um objeto ArrayList e despacha a requisi��o para uma JSP.
             request.setAttribute("lista", lista);
@@ -80,14 +75,14 @@ public class ListTasksServlet extends HttpServlet {
             UserDTO user = (UserDTO) session.getAttribute("user");
             String userId = user.getUuid();
 
-            int pageTask = 1;
-            int tasksPerPage = 3;
+            System.out.println("TESTE MAXIMO:" + userId);
 
+            int pageTask = 1;
             if (request.getParameter("page") != null) {
                 pageTask = Integer.parseInt(request.getParameter("page"));
             }
 
-            int offset = (pageTask - 1) * tasksPerPage;
+            int offset = (pageTask - 1) * 3;
 
 
             String taskName = request.getParameter("taskName");
@@ -96,7 +91,9 @@ public class ListTasksServlet extends HttpServlet {
 
             taskService.registerTask(taskName, priority, isCompleted, userId);
 
-            List<TaskDTO> lista = taskService.listAllUserTasksPagineted(userId, offset, 3);
+            List<TaskDTO> lista = taskService.listAllUserTasksPagineted(userId, offset);
+            System.out.println(lista.size());
+            System.out.println("POST");
 
             request.setAttribute("lista", lista);
             request.setAttribute("currentPage", pageTask);

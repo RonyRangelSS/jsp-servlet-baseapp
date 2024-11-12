@@ -49,7 +49,7 @@ public class OcultarTaskServlet extends HttpServlet {
 
             taskService.ocultarTask(taskId);
 
-            List<TaskDTO> lista = taskService.listAllUserTasksPagineted(userId, offset, 3);
+            List<TaskDTO> lista = taskService.listAllUserTasksPagineted(userId, offset);
 
             request.setAttribute("lista", lista);
             request.setAttribute("currentPage", pageTask);

@@ -23,6 +23,7 @@ public class TaskService {
         task.setUserId(userId);
 
         dao.register(task);
+        System.out.println("TESTE IMPORTTANTE:" + task.getUserId());
     }
 
     public List<TaskDTO> listAllUserTasks(String userId) throws ClassNotFoundException, SQLException {
@@ -39,11 +40,11 @@ public class TaskService {
         return resp;
     }
 
-    public List<TaskDTO> listAllUserTasksPagineted(String userId, int offset, int limit) throws ClassNotFoundException, SQLException {
+    public List<TaskDTO> listAllUserTasksPagineted(String userId, int offset) throws ClassNotFoundException, SQLException {
         ArrayList<TaskDTO> resp = new ArrayList<TaskDTO>();
 
         TaskDAO dao = new TaskDAO();
-        List<Task> lista = dao.listTasksPaginated(userId, offset, limit);
+        List<Task> lista = dao.listTasksPaginated(userId, offset);
         System.out.println(lista);
         int x = 0;
 
