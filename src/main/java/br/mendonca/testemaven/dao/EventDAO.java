@@ -71,4 +71,67 @@ public class EventDAO {
 		return event;
 	}
 
+	/*
+
+	public ArrayList<Event> listAllEventPaginated(String userId, int offset, int limit) throws ClassNotFoundException, SQLException {
+		ArrayList<Event> lista = new ArrayList<Event>();
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+		Statement st = conn.createStatement();
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM events  WHERE userId = ?  LIMIT ? OFFSET ?");
+		ps.setObject(1, UUID.fromString(userId));
+		ps.setInt(2, limit);
+		ps.setInt(3, offset);
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			Event event = new Event();
+			event.setUuid(rs.getString("uuid"));
+			event.setUserId(rs.getString("userId"));
+			event.setEventName(rs.getString("eventName"));
+			event.setDate(rs.getInt("date"));
+			event.setHasPassed(rs.getBoolean("hasPassed"));
+			lista.add(event);
+		}
+		rs.close();
+		return lista;
+	}
+	 */
+
+	public List<Event> listAllEventPaginated(String userId, int maxEventsPerPage, int offset) throws ClassNotFoundException, SQLException {
+		ArrayList<Event> lista = new ArrayList<Event>();
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+		Statement st = conn.createStatement();
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM events  WHERE userId = ?  LIMIT ? OFFSET ?");
+		ps.setObject(1, UUID.fromString(userId));
+		ps.setInt(2, maxEventsPerPage);
+		ps.setInt(3, offset);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			Event event = new Event();
+			event.setUuid(rs.getString("uuid"));
+			event.setUserId(rs.getString("userId"));
+			event.setEventName(rs.getString("eventName"));
+			event.setDate(rs.getInt("date"));
+			event.setHasPassed(rs.getBoolean("hasPassed"));
+			lista.add(event);
+		}
+		rs.close();
+		return lista;
+	}
+	public int countUserEvents(String userId) throws ClassNotFoundException, SQLException {
+		int count = 0;
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+		Statement st = conn.createStatement();
+		PreparedStatement ps = conn.prepareStatement("SELECT COUNT(*) FROM events WHERE userId = ?");
+		ps.setObject(1, UUID.fromString(userId));
+		ResultSet rs = ps.executeQuery();
+		if (rs.next()) {
+			count = rs.getInt(1);
+		}
+		rs.close();
+		return count;
+	}
 }

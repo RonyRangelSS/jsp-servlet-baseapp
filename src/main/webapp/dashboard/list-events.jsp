@@ -68,6 +68,19 @@
 			<% } %>
 			</tbody>
 		</table>
+
+		<div class="d-flex justify-content-between">
+			<%
+				int currentPageIndex = (int) request.getAttribute("currentPageIndex");
+				int totalPages = (int) request.getAttribute("totalPages");
+			%>
+			<% if (currentPageIndex > 1) { %>
+			<a href="/dashboard/events/page?pageIndex=<%= currentPageIndex - 1 %>" class="btn btn-primary">Previous</a>
+			<% } %>
+			<% if (currentPageIndex < totalPages) { %>
+			<a href="/dashboard/events/page?pageIndex=<%= currentPageIndex + 1 %>" class="btn btn-primary">Next</a>
+			<% } %>
+		</div>
 		
 		
 	</main>
