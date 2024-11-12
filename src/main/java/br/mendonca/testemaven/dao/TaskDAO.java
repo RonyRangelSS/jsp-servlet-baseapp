@@ -1,7 +1,6 @@
 package br.mendonca.testemaven.dao;
 
 import br.mendonca.testemaven.model.entities.Task;
-import br.mendonca.testemaven.model.entities.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -49,16 +48,18 @@ public class TaskDAO {
         return lista;
     }
 
-    public List<Task> listUserTasksPaginated(String userId, int offset, int limit) throws ClassNotFoundException, SQLException {
-        ArrayList<Task> lista = new ArrayList<>();
+    public ArrayList<Task> listTasksPaginated(String userId, int offset, int limit) throws ClassNotFoundException, SQLException {
+        ArrayList<Task> lista = new ArrayList<Task>();
 
         Connection conn = ConnectionPostgres.getConexao();
-        PreparedStatement st = conn.prepareStatement("SELECT * FROM tasks WHERE userId = ? LIMIT ? OFFSET ?");
-        st.setObject(1, UUID.fromString(userId));
-        st.setInt(2, limit);
-        st.setInt(3, offset);
-        ResultSet rs = st.executeQuery();
-        int x = 0;
+        conn.setAutoCommit(true);
+
+        Statement st = conn.createStatement();
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM tasks  WHERE userId = ?  LIMIT ? OFFSET ?");
+        ps.setObject(1, UUID.fromString(userId));
+        ps.setInt(2, limit);
+        ps.setInt(3, offset);
+        ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
             Task task = new Task();
@@ -68,11 +69,11 @@ public class TaskDAO {
             task.setVisible(rs.getBoolean("isVisible"));
             task.setPriority(rs.getInt("priority"));
             task.setUserId(rs.getString("userId"));
+
             lista.add(task);
-            x = x++;
         }
-        System.out.println(x);
         rs.close();
+
         return lista;
     }
 }

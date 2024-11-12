@@ -43,7 +43,7 @@ public class TaskService {
         ArrayList<TaskDTO> resp = new ArrayList<TaskDTO>();
 
         TaskDAO dao = new TaskDAO();
-        List<Task> lista = dao.listUserTasksPaginated(userId, offset, limit);
+        List<Task> lista = dao.listTasksPaginated(userId, offset, limit);
         System.out.println(lista);
         int x = 0;
 
