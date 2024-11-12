@@ -16,8 +16,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/dashboard/notes/page")
-public class ListNotesServlet extends HttpServlet {
+@WebServlet("/dashboard/notes/deleted")
+public class DeletedNotes extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,17 +35,14 @@ public class ListNotesServlet extends HttpServlet {
 
             UserDTO user = (UserDTO) session.getAttribute("user");
             String userId = user.getUuid();
-            int totalPages = (int) Math.ceil((double) noteService.countUserNotes(userId) / maxNotesPerPage);
+            int totalPages = (int) Math.ceil((double) noteService.countDeletedNotes(userId) / maxNotesPerPage);
 
-
-            List<NoteDTO> lista = noteService.listNotesForPagination(userId, maxNotesPerPage, offset);
-
-            System.out.println(lista.size());
+            List<NoteDTO> lista = noteService.listDeletedNotesForPagination(userId, maxNotesPerPage, offset);
 
             request.setAttribute("lista", lista);
             request.setAttribute("totalPages", totalPages);
             request.setAttribute("currentPageIndex", currentPageIndex);
-            request.getRequestDispatcher("list-notes.jsp").forward(request, response);
+            request.getRequestDispatcher("list-deleted-notes.jsp").forward(request, response);
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);

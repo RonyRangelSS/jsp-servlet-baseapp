@@ -11,6 +11,6 @@
 
 ## Semana 3
 - Eloise Sophia Lamenha Lins (Fiz com que todo usuário inicie sua conta com 7 eventos já cadastrados)
-- Michael Albuquerque dos Santos (Criei o código pra iniciar um usuário no momento de install e popular a tabela notes, criando paginação para notes)
+- Michael Albuquerque dos Santos (Criei o código pra iniciar um usuário no momento de install e popular a tabela notes, criando paginação para notes, adicionando feature de ocultar e listar notes ocultadas)
 
 Link da página do cliente: https://jsp-servlet-baseapp-4kbl.onrender.com

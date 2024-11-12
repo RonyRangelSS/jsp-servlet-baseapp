@@ -42,16 +42,27 @@ public class NoteService {
         return NoteDTO.noteMapper(note);
     }
 
-    public List<NoteDTO> listNotesForPaginationVisible(String userId, int maxNotesPerPage, int offset) throws ClassNotFoundException, SQLException {
+    public List<NoteDTO> listNotesForPagination(String userId, int maxNotesPerPage, int offset) throws ClassNotFoundException, SQLException {
         ArrayList<NoteDTO> resp = new ArrayList<NoteDTO>();
 
         NoteDAO dao = new NoteDAO();
         List<Note> lista = dao.listNotesForPagination(userId, maxNotesPerPage, offset);
 
         for (Note note : lista) {
-            if (note.isVisible()) {
-                resp.add(NoteDTO.noteMapper(note));
-            }
+            resp.add(NoteDTO.noteMapper(note));
+        }
+
+        return resp;
+    }
+
+    public List<NoteDTO> listDeletedNotesForPagination(String userId, int maxNotesPerPage, int offset) throws ClassNotFoundException, SQLException {
+        ArrayList<NoteDTO> resp = new ArrayList<NoteDTO>();
+
+        NoteDAO dao = new NoteDAO();
+        List<Note> lista = dao.listDeletedNotesForPagination(userId, maxNotesPerPage, offset);
+
+        for (Note note : lista) {
+            resp.add(NoteDTO.noteMapper(note));
         }
 
         return resp;
@@ -61,6 +72,13 @@ public class NoteService {
     public int countUserNotes(String userId) throws ClassNotFoundException, SQLException {
         NoteDAO dao = new NoteDAO();
         int count = dao.countUserNotes(userId);
+
+        return count;
+    }
+
+    public int countDeletedNotes(String userId) throws ClassNotFoundException, SQLException {
+        NoteDAO dao = new NoteDAO();
+        int count = dao.countDeletedNotes(userId);
 
         return count;
     }

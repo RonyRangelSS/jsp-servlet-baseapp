@@ -39,6 +39,7 @@ if (session.getAttribute("user") != null) {
 						<li class="nav-item"><a class="nav-link" href="/dashboard/users">Users</a></li>
 						<li class="nav-item"><a class="nav-link" href="/dashboard/add-note.jsp">Add note</a></li>
 						<li class="nav-item"><a class="nav-link" href="/dashboard/notes/page?pageIndex=1">List notes</a></li>
+						<li class="nav-item"><a class="nav-link" href="/dashboard/notes/deleted?pageIndex=1">Deleted notes</a></li>
 						<li class="nav-item"><a class="nav-link" href="/dashboard/add-event.jsp">Add Event</a></li>
 						<li class="nav-item"><a class="nav-link" href="/dashboard/events">Events</a></li>
 						<li class="nav-item"><a class="nav-link" href="/dashboard/tasks">Tasks</a></li>
