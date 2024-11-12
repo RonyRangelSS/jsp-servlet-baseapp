@@ -1,4 +1,4 @@
-package br.mendonca.testemaven.controller;
+package br.mendonca.testemaven.controller.task;
 
 import java.io.IOException;
 import java.io.PrintWriter;
