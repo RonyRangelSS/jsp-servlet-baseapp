@@ -14,6 +14,10 @@ Aplicação de gerenciamento de tasks (to do list)
 - Eloise Sophia Lamenha Lins (Criei a entidade events. O usuário consegue inserir no sistema permanentemente um evento e suas propriedades, e depois consegue visualizar os mesmos. Também atualizei o about.jsp e o readme.md)
 - Michael Albuquerque dos Santos (Criei entidade notes. O usuario consegue inserir uma note, listar suas notes e visualizar uma note especifica. Criei DTO, DAO, Service, endpoints e JSP pra isso.)
 
+## Semana 3
+- Rony Rangel dos Santos Silva (Instalação das tabelas no banco com 7 individuos)
+
+
 
 Link da página do cliente: https://jsp-servlet-baseapp-4kbl.onrender.com
 
