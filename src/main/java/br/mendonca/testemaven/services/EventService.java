@@ -45,19 +45,16 @@ public class EventService {
 		return EventDTO.eventMapper(event);
 	}
 
-	public List<EventDTO> listAllEventPaginated(String userId, int maxEventsPerPage, int offset) throws ClassNotFoundException, SQLException {
+	public List<EventDTO> listAllEventPaginated(String userId, int offset, int limit) throws ClassNotFoundException, SQLException {
 		ArrayList<EventDTO> resp = new ArrayList<EventDTO>();
 		EventDAO dao = new EventDAO();
-		List<Event> lista = dao.listAllEventPaginated(userId, maxEventsPerPage, offset);
+		List<Event> lista = dao.listAllEventPaginated(userId, offset, limit);
+		int x = 0;
 		for (Event event : lista) {
 			resp.add(EventDTO.eventMapper(event));
+			x = x + 1;
 		}
 		return resp;
-	}
-	public int countUserEvents(String userId) throws ClassNotFoundException, SQLException {
-		EventDAO dao = new EventDAO();
-		int count = dao.countUserEvents(userId);
-		return count;
 	}
 
 }

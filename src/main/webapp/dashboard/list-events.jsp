@@ -69,17 +69,23 @@
 			</tbody>
 		</table>
 
-		<div class="d-flex justify-content-between">
+		<div class="pagination">
 			<%
-				int currentPageIndex = (int) request.getAttribute("currentPageIndex");
-				int totalPages = (int) request.getAttribute("totalPages");
+				int currentPage = (int) request.getAttribute("currentPage");
 			%>
-			<% if (currentPageIndex > 1) { %>
-			<a href="/dashboard/events/page?pageIndex=<%= currentPageIndex - 1 %>" class="btn btn-primary">Previous</a>
-			<% } %>
-			<% if (currentPageIndex < totalPages) { %>
-			<a href="/dashboard/events/page?pageIndex=<%= currentPageIndex + 1 %>" class="btn btn-primary">Next</a>
-			<% } %>
+			<nav aria-label="Navegação de página">
+				<ul class="pagination">
+					<li class="page-item <%= currentPage == 1 ? "disabled" : "" %>">
+						<a class="page-link" href="?page=<%= currentPage - 1 %>">Anterior</a>
+					</li>
+					<li class="page-item">
+						<span class="page-link"><%= currentPage %></span>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="?page=<%= currentPage + 1 %>">Próxima</a>
+					</li>
+				</ul>
+			</nav>
 		</div>
 		
 		

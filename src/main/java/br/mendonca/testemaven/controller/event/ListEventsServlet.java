@@ -16,30 +16,31 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
-@WebServlet("/dashboard/events/page")
+@WebServlet("/dashboard/events")
 public class ListEventsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		HttpSession session = request.getSession();
 		PrintWriter page = response.getWriter();
-		EventService eventService = new EventService();
-
-		int currentPageIndex = Integer.parseInt(request.getParameter("pageIndex"));
-		int maxEventsPerPage = 3;
-		int offset = (currentPageIndex - 1) * maxEventsPerPage;
+		HttpSession session = request.getSession();
 		
 		try {
 			UserDTO user = (UserDTO) session.getAttribute("user");
 			String userId = user.getUuid();
-			int totalPages = (int) Math.ceil((double) eventService.countUserEvents(userId) / maxEventsPerPage);
 
-			List<EventDTO> lista = eventService.listAllEventPaginated(userId, maxEventsPerPage, offset);
+			int pageEvent = 1;
+			int eventsPerPage = 3;
+			if (request.getParameter("page") != null) {
+				pageEvent = Integer.parseInt(request.getParameter("page"));
+			}
+			int offset = (pageEvent - 1) * eventsPerPage;
+			EventService eventService = new EventService();
+			List<EventDTO> lista = eventService.listAllEventPaginated(userId, offset, 3);
 
+			// Anexa � requisi��o um objeto ArrayList e despacha a requisi��o para uma JSP.
 			request.setAttribute("lista", lista);
-			request.setAttribute("totalPages", totalPages);
-			request.setAttribute("currentPageIndex", currentPageIndex);
+			request.setAttribute("currentPage", pageEvent);
 			request.getRequestDispatcher("list-events.jsp").forward(request, response);
 		} catch (Exception e) {
 			// Escreve as mensagens de Exception em uma p�gina de resposta.
@@ -57,8 +58,7 @@ public class ListEventsServlet extends HttpServlet {
 			
 		}
 	}
-	
-	/*
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter page = response.getWriter();
@@ -107,5 +107,4 @@ public class ListEventsServlet extends HttpServlet {
 		}
 	}
 
-	 */
 }
