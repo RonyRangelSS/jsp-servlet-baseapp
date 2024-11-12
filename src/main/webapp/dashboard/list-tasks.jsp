@@ -92,7 +92,10 @@
                         <td><%= task.getPriority() %></td>
                         <td><%= task.getCompleted() %></td>
                         <td><%= task.getVisible()%></td>
-                        <td>Apagar</td>
+                        <form method="post">
+                            <input type="hidden" name="taskId" value="<%= task.getUuid() %>" />
+                            <td><button formaction="/dashboard/ocultar-task">Ocultar</button></td>
+                        </form>
                     </tr>
                         <% } %>
                     <tbody/>
@@ -115,6 +118,9 @@
                     </ul>
                 </nav>
             </div>
+            <form method="post">
+                <button formaction="/dashboard/show-tasks">Mostrar todas as tasks</button>
+            </form>
         </div>
     </div>
 

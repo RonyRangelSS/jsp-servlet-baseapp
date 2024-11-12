@@ -76,4 +76,26 @@ public class TaskDAO {
 
         return lista;
     }
+
+    public void ocultarTask(String uuid) throws ClassNotFoundException, SQLException {
+        Connection conn = ConnectionPostgres.getConexao();
+        conn.setAutoCommit(true);
+
+        PreparedStatement ps = conn.prepareStatement("UPDATE tasks SET isVisible = false WHERE uuid = ?");
+        ps.setObject(1, UUID.fromString(uuid));
+        ps.execute();
+        ps.close();
+    }
+
+    public void ShowAllTasks(String userId) throws ClassNotFoundException, SQLException {
+        Connection conn = ConnectionPostgres.getConexao();
+        conn.setAutoCommit(true);
+
+        PreparedStatement ps = conn.prepareStatement("UPDATE tasks SET isVisible = true WHERE userID = ?");
+        ps.setObject(1, UUID.fromString(userId));
+        ps.execute();
+        ps.close();
+    }
+
+    
 }

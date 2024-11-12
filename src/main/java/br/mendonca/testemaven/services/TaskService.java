@@ -48,11 +48,24 @@ public class TaskService {
         int x = 0;
 
         for (Task task : lista) {
-            resp.add(TaskDTO.taskMapper(task));
-            x = x + 1;
+            if (task.getVisible() == true) {
+                resp.add(TaskDTO.taskMapper(task));
+            }
+            
+            
         }
         System.out.println(x);
 
         return resp;
+    }
+
+    public void ocultarTask(String taskId) throws ClassNotFoundException, SQLException {
+        TaskDAO dao = new TaskDAO();
+        dao.ocultarTask(taskId);
+    }
+
+    public void ShowAllTasks(String userId) throws ClassNotFoundException, SQLException {
+        TaskDAO dao = new TaskDAO();
+        dao.ShowAllTasks(userId);
     }
 }

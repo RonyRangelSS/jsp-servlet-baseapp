@@ -15,7 +15,7 @@ Aplicação de gerenciamento de tasks (to do list)
 - Michael Albuquerque dos Santos (Criei entidade notes. O usuario consegue inserir uma note, listar suas notes e visualizar uma note especifica. Criei DTO, DAO, Service, endpoints e JSP pra isso.)
 
 ## Semana 3
-- Rony Rangel dos Santos Silva (Instalação das tabelas no banco com 7 individuos)
+- Rony Rangel dos Santos Silva (Instalação das tabelas no banco com 7 individuos, criação do botão de ocultar tasks e o de mostrar todas as tasks)
 
 
 
