@@ -128,6 +128,20 @@ public class NoteDAO {
         return count;
     }
 
+    public void updateVisibleField(String noteId) throws ClassNotFoundException, SQLException {
+        Connection conn = ConnectionPostgres.getConexao();
+        conn.setAutoCommit(true);
+
+        Note note = this.getNoteById(noteId);
+
+        PreparedStatement ps = conn.prepareStatement("UPDATE notes SET isVisible = ? WHERE uuid = ?");
+        ps.setBoolean(1, !note.isVisible());
+        ps.setObject(2, UUID.fromString(noteId));
+
+        ps.executeUpdate();
+        ps.close();
+    }
+
 
 
 

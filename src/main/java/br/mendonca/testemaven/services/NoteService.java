@@ -42,24 +42,32 @@ public class NoteService {
         return NoteDTO.noteMapper(note);
     }
 
-    public List<NoteDTO> listNotesForPagination(String userId, int maxNotesPerPage, int offset) throws ClassNotFoundException, SQLException {
+    public List<NoteDTO> listNotesForPaginationVisible(String userId, int maxNotesPerPage, int offset) throws ClassNotFoundException, SQLException {
         ArrayList<NoteDTO> resp = new ArrayList<NoteDTO>();
 
         NoteDAO dao = new NoteDAO();
         List<Note> lista = dao.listNotesForPagination(userId, maxNotesPerPage, offset);
 
         for (Note note : lista) {
-            resp.add(NoteDTO.noteMapper(note));
+            if (note.isVisible()) {
+                resp.add(NoteDTO.noteMapper(note));
+            }
         }
 
         return resp;
     }
+
 
     public int countUserNotes(String userId) throws ClassNotFoundException, SQLException {
         NoteDAO dao = new NoteDAO();
         int count = dao.countUserNotes(userId);
 
         return count;
+    }
+
+    public void updateVisibleField(String noteId) throws ClassNotFoundException, SQLException {
+        NoteDAO dao = new NoteDAO();
+        dao.updateVisibleField(noteId);
     }
 
 
