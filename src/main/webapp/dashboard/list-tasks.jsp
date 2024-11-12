@@ -78,6 +78,7 @@
                         <th scope="col">Nome da task</th>
                         <th scope="col">Prioridade</th>
                         <th scope="col">Foi feita ?</th>
+                        <th scope="col">Visível ? ?</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -90,6 +91,7 @@
                         <td><%= task.getTaskName() %></td>
                         <td><%= task.getPriority() %></td>
                         <td><%= task.getCompleted() %></td>
+                        <td><%= task.getVisible()%></td>
                         <td>Apagar</td>
                     </tr>
                         <% } %>

@@ -13,11 +13,12 @@ public class TaskDAO {
         Connection conn = ConnectionPostgres.getConexao();
         conn.setAutoCommit(true);
 
-        PreparedStatement ps = conn.prepareStatement("INSERT INTO tasks (userId, taskName, isCompleted, priority) values (?,?,?, ?)");
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO tasks (userId, taskName, isCompleted, isVisible, priority) values (?,?,?, ?, ?)");
         ps.setObject(1, task.getUserId());
         ps.setString(2, task.getTaskName());
         ps.setBoolean(3, task.getCompleted());
-        ps.setInt(4, task.getPriority());
+        ps.setBoolean(4, true);
+        ps.setInt(5, task.getPriority());
         ps.execute();
         ps.close();
     }
@@ -36,6 +37,7 @@ public class TaskDAO {
             task.setUuid(rs.getString("uuid"));
             task.setTaskName(rs.getString("taskName"));
             task.setCompleted(rs.getBoolean("isCompleted"));
+            task.setVisible(rs.getBoolean("isVisible"));
             task.setPriority(rs.getInt("priority"));
             task.setUserId(rs.getString("userId"));
 

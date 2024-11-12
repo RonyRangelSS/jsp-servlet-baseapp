@@ -69,8 +69,10 @@ public class InstallService {
 				+ "    userId UUID REFERENCES users(uuid),"
 				+ "    taskName VARCHAR(255) NOT NULL,"
 				+ "    isCompleted BOOLEAN,"
+				+ "    isVisible BOOLEAN,"
 				+ "    priority INTEGER"
 				+ ")");
 	}
+
 
 }
