@@ -38,4 +38,21 @@ public class TaskService {
 
         return resp;
     }
+
+    public List<TaskDTO> listAllUserTasksPagineted(String userId, int offset, int limit) throws ClassNotFoundException, SQLException {
+        ArrayList<TaskDTO> resp = new ArrayList<TaskDTO>();
+
+        TaskDAO dao = new TaskDAO();
+        List<Task> lista = dao.listUserTasksPaginated(userId, offset, limit);
+        System.out.println(lista);
+        int x = 0;
+
+        for (Task task : lista) {
+            resp.add(TaskDTO.taskMapper(task));
+            x = x + 1;
+        }
+        System.out.println(x);
+
+        return resp;
+    }
 }

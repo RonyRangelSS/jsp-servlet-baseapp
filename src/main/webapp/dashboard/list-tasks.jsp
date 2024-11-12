@@ -69,7 +69,7 @@
 
         </div>
 
-        <div class="d-flex flex-col col-md-5 ms-5">
+        <div class="d-flex flex-column col-md-5 ms-5">
             <h1 class="h3 mb-3 fw-normal">Tasks</h1>
             <table class="table">
                     <thead>
@@ -97,6 +97,24 @@
                         <% } %>
                     <tbody/>
             <table/>
+            <div class="pagination">
+                <%
+                    int currentPage = (int) request.getAttribute("currentPage");
+                %>
+                <nav aria-label="Navegação de página">
+                    <ul class="pagination">
+                        <li class="page-item <%= currentPage == 1 ? "disabled" : "" %>">
+                            <a class="page-link" href="?page=<%= currentPage - 1 %>">Anterior</a>
+                        </li>
+                        <li class="page-item">
+                            <span class="page-link"><%= currentPage %></span>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<%= currentPage + 1 %>">Próxima</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
 

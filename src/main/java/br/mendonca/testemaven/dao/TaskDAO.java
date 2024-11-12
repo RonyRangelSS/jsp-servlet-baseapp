@@ -48,4 +48,31 @@ public class TaskDAO {
 
         return lista;
     }
+
+    public List<Task> listUserTasksPaginated(String userId, int offset, int limit) throws ClassNotFoundException, SQLException {
+        ArrayList<Task> lista = new ArrayList<>();
+
+        Connection conn = ConnectionPostgres.getConexao();
+        PreparedStatement st = conn.prepareStatement("SELECT * FROM tasks WHERE userId = ? LIMIT ? OFFSET ?");
+        st.setObject(1, UUID.fromString(userId));
+        st.setInt(2, limit);
+        st.setInt(3, offset);
+        ResultSet rs = st.executeQuery();
+        int x = 0;
+
+        while (rs.next()) {
+            Task task = new Task();
+            task.setUuid(rs.getString("uuid"));
+            task.setTaskName(rs.getString("taskName"));
+            task.setCompleted(rs.getBoolean("isCompleted"));
+            task.setVisible(rs.getBoolean("isVisible"));
+            task.setPriority(rs.getInt("priority"));
+            task.setUserId(rs.getString("userId"));
+            lista.add(task);
+            x = x++;
+        }
+        System.out.println(x);
+        rs.close();
+        return lista;
+    }
 }
