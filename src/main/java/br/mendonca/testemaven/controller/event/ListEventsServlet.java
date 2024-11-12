@@ -27,7 +27,8 @@ public class ListEventsServlet extends HttpServlet {
 		EventService eventService = new EventService();
 		
 		try {
-			String userId = (String) session.getAttribute("uuid");
+			UserDTO user = (UserDTO) session.getAttribute("user");
+			String userId = user.getUuid();
 
 			List<EventDTO> lista = eventService.listAllEvent(userId);
 

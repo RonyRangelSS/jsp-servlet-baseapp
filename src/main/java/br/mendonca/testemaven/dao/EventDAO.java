@@ -28,13 +28,13 @@ public class EventDAO {
 		Connection conn = ConnectionPostgres.getConexao();
 		conn.setAutoCommit(true);
 
-		PreparedStatement ps = conn.prepareStatement("SELECT * FROM events WHERE userId = ?");
-		ps.setObject(1,UUID.fromString(userId));
-		ResultSet rs = ps.executeQuery();
+		Statement st = conn.createStatement();
+		ResultSet rs = st.executeQuery("SELECT * FROM events");
 		
 		while (rs.next()) {
 			Event event = new Event();
 			event.setUuid(rs.getString("uuid"));
+			event.setUserId(rs.getString("userId"));
 			event.setEventName(rs.getString("eventName"));
 			event.setDate(rs.getInt("date"));
 			event.setHasPassed(rs.getBoolean("hasPassed"));

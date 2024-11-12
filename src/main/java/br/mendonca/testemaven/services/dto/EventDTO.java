@@ -4,11 +4,18 @@ import br.mendonca.testemaven.model.entities.Event;
 
 public class EventDTO {
 
+	private String uuid;
 	private String userId;
 	private String eventName;
 	private int date;
 	private Boolean hasPassed;
-	
+
+	public String getUuid() {
+		return uuid;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -37,6 +44,7 @@ public class EventDTO {
 	
 	public static EventDTO eventMapper(Event event) {
 		EventDTO dto = new EventDTO();
+		dto.setUuid(event.getUuid());
 		dto.setUserId(event.getUserId());
 		dto.setEventName(event.getEventName());
 		dto.setDate(event.getDate());
