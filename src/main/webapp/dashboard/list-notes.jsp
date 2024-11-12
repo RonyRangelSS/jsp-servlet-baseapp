@@ -41,14 +41,12 @@
 
 
 
-    <h1 class="h3 mb-3 fw-normal">Tasks</h1>
+    <h1 class="h3 mb-3 fw-normal">Notes</h1>
     <table class="table">
         <thead>
         <tr>
-            <th scope="col"></th>
-            <th scope="col">Task name</th>
+            <th scope="col">Note name</th>
             <th scope="col">Status</th>
-            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>

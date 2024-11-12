@@ -10,3 +10,8 @@
 - Michael Albuquerque dos Santos (Criei entidade notes. O usuario consegue inserir uma note, listar suas notes e visualizar uma note especifica. Criei DTO, DAO, Service, endpoints e JSP pra isso.)
 
 Link da página do cliente: https://jsp-servlet-baseapp-4kbl.onrender.com
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> development
