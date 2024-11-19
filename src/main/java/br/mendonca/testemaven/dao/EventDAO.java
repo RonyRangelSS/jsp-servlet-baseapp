@@ -1,7 +1,6 @@
 package br.mendonca.testemaven.dao;
 
 import br.mendonca.testemaven.model.entities.Event;
-import br.mendonca.testemaven.model.entities.Note;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ public class EventDAO {
 	public void register(Event event) throws ClassNotFoundException, SQLException {
 		Connection conn = ConnectionPostgres.getConexao();
 		conn.setAutoCommit(true);
-		
+
 		PreparedStatement ps = conn.prepareStatement("INSERT INTO events (userId, eventName, date, hasPassed, isVisible) values (?,?,?,?,?)");
 		ps.setObject(1, UUID.fromString(event.getUserId()));
 		ps.setString(2, event.getEventName());
@@ -23,16 +22,16 @@ public class EventDAO {
 		ps.execute();
 		ps.close();
 	}
-	
+
 	public List<Event> listAllEvent(String userId) throws ClassNotFoundException, SQLException {
 		ArrayList<Event> lista = new ArrayList<Event>();
-		
+
 		Connection conn = ConnectionPostgres.getConexao();
 		conn.setAutoCommit(true);
 
 		Statement st = conn.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM events");
-		
+		ResultSet rs = st.executeQuery("SELECT * FROM events WHERE isVisible = TRUE");
+
 		while (rs.next()) {
 			Event event = new Event();
 			event.setUuid(rs.getString("uuid"));
@@ -41,37 +40,13 @@ public class EventDAO {
 			event.setDate(rs.getInt("date"));
 			event.setHasPassed(rs.getBoolean("hasPassed"));
 			event.setIsVisible(rs.getBoolean("isVisible"));
-			
+
 			lista.add(event);
 		}
-		
+
 		rs.close();
-		
+
 		return lista;
-	}
-
-	public Event getEventById(String eventId) throws ClassNotFoundException, SQLException {
-		Connection conn = ConnectionPostgres.getConexao();
-		conn.setAutoCommit(true);
-
-		PreparedStatement ps = conn.prepareStatement("SELECT * FROM events WHERE uuid = ?");
-		ps.setObject(1, UUID.fromString(eventId));
-		ResultSet rs = ps.executeQuery();
-
-		Event event = new Event();
-
-		while (rs.next()) {
-			event.setUuid(rs.getString("uuid"));
-			event.setUserId(rs.getString("userId"));
-			event.setEventName(rs.getString("eventName"));
-			event.setDate(rs.getInt("date"));
-			event.setHasPassed(rs.getBoolean("hasPassed"));
-			event.setIsVisible(rs.getBoolean("isVisible"));
-		}
-
-		rs.close();
-
-		return event;
 	}
 
 	public ArrayList<Event> listAllEventPaginated(String userId, int offset, int limit) throws ClassNotFoundException, SQLException {
@@ -102,6 +77,56 @@ public class EventDAO {
 		return lista;
 	}
 
+	public List<Event> listAllDeletedEvent(String userId) throws ClassNotFoundException, SQLException {
+		ArrayList<Event> lista = new ArrayList<Event>();
+
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+
+		Statement st = conn.createStatement();
+		ResultSet rs = st.executeQuery("SELECT * FROM events WHERE isVisible = FALSE");
+
+		while (rs.next()) {
+			Event event = new Event();
+			event.setUuid(rs.getString("uuid"));
+			event.setUserId(rs.getString("userId"));
+			event.setEventName(rs.getString("eventName"));
+			event.setDate(rs.getInt("date"));
+			event.setHasPassed(rs.getBoolean("hasPassed"));
+			event.setIsVisible(rs.getBoolean("isVisible"));
+
+			lista.add(event);
+		}
+
+		rs.close();
+
+		return lista;
+	}
+
+	public Event getEventById(String eventId) throws ClassNotFoundException, SQLException {
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM events WHERE uuid = ?");
+		ps.setObject(1, UUID.fromString(eventId));
+		ResultSet rs = ps.executeQuery();
+
+		Event event = new Event();
+
+		while (rs.next()) {
+			event.setUuid(rs.getString("uuid"));
+			event.setUserId(rs.getString("userId"));
+			event.setEventName(rs.getString("eventName"));
+			event.setDate(rs.getInt("date"));
+			event.setHasPassed(rs.getBoolean("hasPassed"));
+			event.setIsVisible(rs.getBoolean("isVisible"));
+		}
+
+		rs.close();
+
+		return event;
+	}
+
 	public void updateIsVisibleField(String eventId) throws ClassNotFoundException, SQLException {
 		Connection conn = ConnectionPostgres.getConexao();
 		conn.setAutoCommit(true);
@@ -114,5 +139,4 @@ public class EventDAO {
 		ps.executeUpdate();
 		ps.close();
 	}
-
 }
