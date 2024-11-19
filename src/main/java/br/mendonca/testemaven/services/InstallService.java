@@ -117,6 +117,7 @@ public class InstallService {
 							"VALUES ('%s', '%s', '%s', %d, %b)",
 					users.get(0).getUuid(), titles[i], contents[i], dates[i], isDoneStatus[i]
 			);
+			statement(sql);
 		}
 	}
 
