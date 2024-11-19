@@ -1,5 +1,7 @@
 package br.mendonca.testemaven.dao;
 
+import java.util.UUID;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

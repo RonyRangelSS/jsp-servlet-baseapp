@@ -70,7 +70,7 @@ if (session.getAttribute("user") != null) {
 				<tr>
 					<td scope="col">Rony Rangel dos Santos Silva</th>
 					<td scope="col">Task</th>
-					<td scope="col">TaskService</th>
+					<td scope="col">3</th>
 				</tr>
 				<tr>
 					<td scope="col">Eloise Sophia Lamenha Lins</th>
