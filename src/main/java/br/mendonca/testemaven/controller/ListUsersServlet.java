@@ -20,17 +20,18 @@ public class ListUsersServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter page = response.getWriter();
+		String search = request.getParameter("search");
 		
 		try {
 			UserService service = new UserService();
 			List<UserDTO> lista = service.listAllUsers();
 			
-			// Anexa à requisição um objeto ArrayList e despacha a requisição para uma JSP.
+			// Anexa ï¿½ requisiï¿½ï¿½o um objeto ArrayList e despacha a requisiï¿½ï¿½o para uma JSP.
 			request.setAttribute("lista", lista);
 			request.getRequestDispatcher("list-users.jsp").forward(request, response);
 		} catch (Exception e) {
-			// Escreve as mensagens de Exception em uma página de resposta.
-			// Não apagar este bloco.
+			// Escreve as mensagens de Exception em uma pï¿½gina de resposta.
+			// Nï¿½o apagar este bloco.
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
 			e.printStackTrace(pw);
@@ -49,19 +50,20 @@ public class ListUsersServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter page = response.getWriter();
+		String search = request.getParameter("search");
+		UserService userService = new UserService();
+		if (search == null) {
+			search = "";
+		}
 		
 		try {
-			// A programação do servlet deve ser colocada neste bloco try.
-			// Apague o conteúdo deste bloco try e escreva seu código.
-			String parametro = request.getParameter("nomeparametro");
-			
-			page.println("Parametro: " + parametro);
-			page.close();
-			
-			
+			List<UserDTO> lista = userService.searchUsers(search);
+
+			request.setAttribute("lista", lista);
+			request.getRequestDispatcher("list-users.jsp").forward(request, response);
 		} catch (Exception e) {
-			// Escreve as mensagens de Exception em uma página de resposta.
-			// Não apagar este bloco.
+			// Escreve as mensagens de Exception em uma pï¿½gina de resposta.
+			// Nï¿½o apagar este bloco.
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
 			e.printStackTrace(pw);

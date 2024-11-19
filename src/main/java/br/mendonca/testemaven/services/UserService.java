@@ -45,7 +45,7 @@ public class UserService {
 		}
 	}
 
-	public List<UserDTO> searchTasks(String searchQuery) throws Exception, SQLException {
+	public List<UserDTO> searchUsers(String searchQuery) throws Exception, SQLException {
 		ArrayList<UserDTO> resp = new ArrayList<UserDTO>();
 
 		UserDAO dao = new UserDAO();
