@@ -24,23 +24,13 @@ public class DeletedEvents extends HttpServlet {
         HttpSession session = request.getSession();
         PrintWriter page = response.getWriter();
         EventService eventService = new EventService();
-
-		/*
-		int currentPageIndex = Integer.parseInt(request.getParameter("pageIndex"));
-        int maxNotesPerPage = 3;
-        int offset = (currentPageIndex - 1) * maxNotesPerPage;
-		 */
-
         try {
             UserDTO user = (UserDTO) session.getAttribute("user");
             String userId = user.getUuid();
-            //int totalPages = (int) Math.ceil((double) noteService.countDeletedNotes(userId) / maxNotesPerPage);
 
             List<EventDTO> lista = eventService.listAllDeletedEvent(userId);
 
             request.setAttribute("lista", lista);
-            //request.setAttribute("totalPages", totalPages);
-            //request.setAttribute("currentPageIndex", currentPageIndex);
             request.getRequestDispatcher("list-deleted-events.jsp").forward(request, response);
         } catch (Exception e) {
             // Escreve as mensagens de Exception em uma p�gina de resposta.
