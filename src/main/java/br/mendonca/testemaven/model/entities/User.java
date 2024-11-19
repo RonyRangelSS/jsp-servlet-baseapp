@@ -34,19 +34,11 @@ public class User {
 		this.password = password;
 	}
 
-	public Integer getIdade() {
-		return idade;
-	}
+	public Integer getIdade() {return idade;}
 
-	public void setIdade(Integer idade) {
-		this.idade = idade;
-	}
+	public void setIdade(Integer idade) {this.idade = idade;}
 
-	public Boolean getStatus() {
-		return status;
-	}
+	public Boolean getStatus() {return status;}
 
-	public void setStatus(Boolean status) {
-		this.status = status;
-	}
+	public void setStatus(Boolean status) {this.status = status;}
 }
