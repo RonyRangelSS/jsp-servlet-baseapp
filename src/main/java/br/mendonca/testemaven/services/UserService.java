@@ -44,4 +44,23 @@ public class UserService {
 			System.out.println(e.getMessage());
 		}
 	}
+
+	public void deleteFollowRelation(String followerId, String followedId) throws ClassNotFoundException, SQLException {
+		UserDAO dao = new UserDAO();
+
+		dao.deleteFollowRelation(followerId, followedId);
+	}
+
+	public List<UserDTO> listFollowingUsers(String followerId) throws ClassNotFoundException, SQLException {
+		ArrayList<UserDTO> resp = new ArrayList<UserDTO>();
+
+		UserDAO dao = new UserDAO();
+		List<User> lista = dao.listFollowingUsers(followerId);
+
+		for (User user : lista) {
+			resp.add(UserDTO.userMapper(user));
+		}
+
+		return resp;
+	}
 }

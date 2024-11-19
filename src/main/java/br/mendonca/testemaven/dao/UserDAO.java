@@ -117,4 +117,62 @@ public class UserDAO {
 		ps.close();
 	}
 
+	public void deleteFollowRelation(String followerId, String followedId) throws ClassNotFoundException, SQLException {
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+
+		PreparedStatement ps = conn.prepareStatement("DELETE FROM follows WHERE followerId = ? AND followedId = ?");
+		ps.setObject(1, UUID.fromString(followerId));
+		ps.setObject(2, UUID.fromString(followedId));
+		ps.execute();
+		ps.close();
+	}
+
+	public User getUserById(String userId) throws ClassNotFoundException, SQLException {
+		ArrayList<User> lista = new ArrayList<User>();
+
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM users WHERE uuid = ?");
+		ps.setObject(1, UUID.fromString(userId));
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			User user = new User();
+			user.setUuid(rs.getString("uuid"));
+			user.setName(rs.getString("name"));
+			user.setEmail(rs.getString("email"));
+			user.setPassword(rs.getString("password"));
+
+			lista.add(user);
+		}
+
+		return lista.get(0);
+
+	}
+	public List<User> listFollowingUsers(String followerId) throws ClassNotFoundException, SQLException {
+		ArrayList<User> lista = new ArrayList<User>();
+
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM follows WHERE followerId = ?");
+		ps.setObject(1, UUID.fromString(followerId));
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			User user = new User();
+			String followedId = (rs.getString("followedId"));
+
+			user = getUserById(followedId);
+
+			lista.add(user);
+		}
+
+		rs.close();
+
+		return lista;
+	}
+
 }
