@@ -10,13 +10,15 @@ import br.mendonca.testemaven.services.dto.UserDTO;
 
 public class UserService {
 	
-	public void register(String name, String email, String password) throws ClassNotFoundException, SQLException {
+	public void register(String name, String email, String password, Integer idade, Boolean status) throws ClassNotFoundException, SQLException {
 		UserDAO dao = new UserDAO();
 		
 		User user = new User();
 		user.setName(name);
 		user.setEmail(email);
 		user.setPassword(password);
+		user.setIdade(idade);
+		user.setStatus(status);
 		
 		dao.register(user);
 	}
