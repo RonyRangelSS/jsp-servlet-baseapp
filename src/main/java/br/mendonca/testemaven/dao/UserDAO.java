@@ -44,6 +44,8 @@ public class UserDAO {
 			user.setName(rs.getString("name"));
 			user.setEmail(rs.getString("email"));
 			user.setPassword(rs.getString("password"));
+			user.setIdade(rs.getInt("idade"));
+			user.setStatus(rs.getBoolean("status"));
 			
 			lista.add(user);
 		}

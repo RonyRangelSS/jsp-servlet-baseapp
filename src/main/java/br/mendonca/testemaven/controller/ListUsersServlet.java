@@ -45,38 +45,5 @@ public class ListUsersServlet extends HttpServlet {
 			
 		}
 	}
-	
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		PrintWriter page = response.getWriter();
-		String search = request.getParameter("search");
-		UserService userService = new UserService();
-		if (search == null) {
-			search = "";
-		}
-		
-		try {
-			List<UserDTO> lista = userService.searchUsers(search);
-
-			request.setAttribute("lista", lista);
-			request.getRequestDispatcher("list-users.jsp").forward(request, response);
-		} catch (Exception e) {
-			// Escreve as mensagens de Exception em uma p�gina de resposta.
-			// N�o apagar este bloco.
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			e.printStackTrace(pw);
-			
-			page.println("<html lang='pt-br'><head><title>Error</title></head><body>");
-			page.println("<h1>Error</h1>");
-			page.println("<code>");
-			page.println(sw.toString());
-			page.println("</code>");
-			page.println("</body></html>");
-			page.close();
-		} finally {
-			
-		}
-	}
 }

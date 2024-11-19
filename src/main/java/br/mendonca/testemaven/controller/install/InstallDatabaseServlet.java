@@ -66,7 +66,7 @@ public class InstallDatabaseServlet extends HttpServlet {
 			service.populateEvents();
 			msg += "<h2>Populate table events sucessful!</h2>\n";
 
-			UUID userId = service.createSingleUser("Fernando", "fernando@gmail.com", "1234");
+			UUID userId = service.createSingleUser("Fernando", "fernando@gmail.com", "1234", 24, false);
 			msg += "<h2>Create user sucessful! Your id is </h2>\n" + userId;
 
 			service.createTasksForUser(userId);

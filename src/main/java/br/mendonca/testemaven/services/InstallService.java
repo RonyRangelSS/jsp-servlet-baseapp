@@ -34,10 +34,12 @@ public class InstallService {
 				+ "    uuid UUID PRIMARY KEY DEFAULT gen_random_uuid(),"
 				+ "    name VARCHAR(255) NOT NULL,"
 				+ "    email VARCHAR(255) NOT NULL,"
-				+ "    password VARCHAR(255) NOT NULL),"
-				+ "    idade INTEGER NOT NULL),"
-				+ "    status BOOLEAN NOT NULL)");
+				+ "    password VARCHAR(255) NOT NULL,"
+				+ "    idade INTEGER NOT NULL,"
+				+ "    status BOOLEAN NOT NULL"
+				+ ")");
 	}
+
 
 	public void createFollowsTable() throws ClassNotFoundException, SQLException {
 		statement("CREATE TABLE follows ("
@@ -102,8 +104,8 @@ public class InstallService {
 		};
 
 		String sql = String.format(
-				"INSERT INTO users (name, email, password) VALUES ('%s', '%s', '%s')",
-				"michael", "michael-alb@hotmail.com", "123"
+				"INSERT INTO users (name, email, password, idade, status) VALUES ('%s', '%s', '%s', '%d', '%b')",
+				"michael", "michael-alb@hotmail.com", "123", 23, true
 		);
 
 		statement(sql);
@@ -137,9 +139,9 @@ public class InstallService {
 		}
 	}
 
-	public UUID createSingleUser(String name, String email, String password) throws ClassNotFoundException, SQLException {
-		String sql = String.format("INSERT INTO users (name, email, password) VALUES ('%s', '%s', '%s') RETURNING uuid",
-				name, email, password);
+	public UUID createSingleUser(String name, String email, String password, Integer idade, Boolean status) throws ClassNotFoundException, SQLException {
+		String sql = String.format("INSERT INTO users (name, email, password, idade, status) VALUES ('%s', '%s', '%s', '%d', '%b') RETURNING uuid",
+				name, email, password, idade, status);
 		Connection conn = ConnectionPostgres.getConexao();
 		Statement st = conn.createStatement();
 

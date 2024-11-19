@@ -40,6 +40,10 @@
 			</div>
 		</nav>
 
+		<form method="get" action="user-search">
+			<input type="text" name="search" placeholder="Search tasks..." />
+			<button type="submit">Search</button>
+		</form>
 
 
     	<h1 class="h3 mb-3 fw-normal">Usuários</h1>
