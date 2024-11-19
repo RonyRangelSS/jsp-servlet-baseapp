@@ -33,4 +33,15 @@ public class UserService {
 		
 		return resp;
 	}
+
+	public void createFollowRelation(String followerId, String followedId) throws ClassNotFoundException, SQLException {
+		UserDAO dao = new UserDAO();
+
+		try {
+			dao.createFollowRelation(followerId, followedId);
+		}
+		catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }

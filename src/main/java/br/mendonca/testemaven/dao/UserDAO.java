@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import br.mendonca.testemaven.model.entities.User;
 
@@ -101,6 +102,17 @@ public class UserDAO {
 		rs.close();
 		
 		return lista;
+	}
+
+	public void createFollowRelation(String followerId, String followedId) throws ClassNotFoundException, SQLException {
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+
+		PreparedStatement ps = conn.prepareStatement("INSERT INTO follows (followerId, followedId) values (?,?)");
+		ps.setObject(1, UUID.fromString(followerId));
+		ps.setObject(2, UUID.fromString(followedId));
+		ps.execute();
+		ps.close();
 	}
 
 }
