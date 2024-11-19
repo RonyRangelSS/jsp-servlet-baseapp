@@ -109,9 +109,6 @@
                         </ul>
                     </nav>
                 </div>
-                <form method="post">
-                    <button formaction="/dashboard/show-tasks">Mostrar todas as tasks</button>
-                </form>
         </div>
     </div>
 
