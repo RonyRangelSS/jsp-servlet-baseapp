@@ -67,8 +67,17 @@ public class TaskService {
         dao.ocultarTask(taskId);
     }
 
-    public void ShowAllTasks(String userId) throws ClassNotFoundException, SQLException {
+    public List<TaskDTO> listAllDeletedTasksPagineted(String userId, int offset) throws ClassNotFoundException, SQLException {
+        ArrayList<TaskDTO> resp = new ArrayList<TaskDTO>();
+
         TaskDAO dao = new TaskDAO();
-        dao.ShowAllTasks(userId);
+        List<Task> lista = dao.listDeletedTasksPaginated(userId, offset);
+        System.out.println(lista);
+
+        for (Task task : lista) {
+            resp.add(TaskDTO.taskMapper(task));
+        }
+
+        return resp;
     }
 }
