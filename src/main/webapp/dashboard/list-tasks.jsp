@@ -30,8 +30,16 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link" href="/dashboard/dashboard.jsp">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/dashboard/users">Users</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/dashboard/about.jsp">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard/seguindo">Seguindo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard/add-note.jsp">Add note</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard/notes/page?pageIndex=1">List notes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard/notes/deleted?pageIndex=1">Deleted notes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard/add-event.jsp">Add Event</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard/events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard/events-deleted">Deleted Events</a></li>
                     <li class="nav-item"><a class="nav-link" href="/dashboard/tasks">Tasks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard/deleted-tasks">Deleted tasks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard/about.jsp">About</a></li>
                 </ul>
                 <span class="navbar-text">
 						<a class="btn btn-success" href="/auth/logoff">Logoff</a>
