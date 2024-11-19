@@ -15,13 +15,10 @@ Aplicação de gerenciamento de tasks (to do list)
 - Michael Albuquerque dos Santos (Criei entidade notes. O usuario consegue inserir uma note, listar suas notes e visualizar uma note especifica. Criei DTO, DAO, Service, endpoints e JSP pra isso.)
 
 ## Semana 3
-<<<<<<< HEAD
 - Michael Albuquerque dos Santos (Criei o código pra iniciar um usuário no momento de install e popular a tabela notes, criando paginação para notes, adicionando feature de ocultar e listar notes ocultadas)
 - Eloise Sophia Lamenha Lins (Fiz com que todo usuário inicie sua conta com 7 eventos já cadastrados)
-=======
 - Rony Rangel dos Santos Silva (Instalação das tabelas no banco com 7 individuos, paginação da lista de individuos, criação do botão de ocultar tasks e o de mostrar todas as tasks)
 
 
->>>>>>> rony-rangel
 
 Link da página do cliente: https://jsp-servlet-baseapp-4kbl.onrender.com
