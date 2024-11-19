@@ -37,6 +37,20 @@ public class InstallService {
 				+ "    password VARCHAR(255) NOT NULL)");
 	}
 
+	public void createFollowsTable() throws ClassNotFoundException, SQLException {
+		statement("CREATE TABLE follows ("
+				+ "    followerId UUID NOT NULL,"
+				+ "    followedId UUID NOT NULL,"
+				+ "    PRIMARY KEY (followerId, followedId),"
+				+ "    FOREIGN KEY (followerId) REFERENCES users(uuid) ON DELETE CASCADE,"
+				+ "    FOREIGN KEY (followedId) REFERENCES users(uuid) ON DELETE CASCADE"
+				+ ")");
+	}
+
+	public void deleteFollowsTable() throws ClassNotFoundException, SQLException {
+		statement("DROP TABLE IF EXISTS follows");
+	}
+
 	public void deleteNoteTable() throws ClassNotFoundException, SQLException {
 		statement("DROP TABLE IF EXISTS notes");
 	}

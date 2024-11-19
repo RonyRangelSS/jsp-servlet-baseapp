@@ -106,4 +106,15 @@ public class UserDAO {
 		return lista;
 	}
 
+	public void createFollowRelation(String followerId, String followedId) throws ClassNotFoundException, SQLException {
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+
+		PreparedStatement ps = conn.prepareStatement("INSERT INTO follows (followerId, followedId) values (?,?)");
+		ps.setObject(1, UUID.fromString(followerId));
+		ps.setObject(2, UUID.fromString(followedId));
+		ps.execute();
+		ps.close();
+	}
+
 }
