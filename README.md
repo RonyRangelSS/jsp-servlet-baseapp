@@ -16,12 +16,12 @@ Aplicação de gerenciamento de tasks (to do list)
 
 ## Semana 3
 - Michael Albuquerque dos Santos (Criei o código pra iniciar um usuário no momento de install e popular a tabela notes, criando paginação para notes, adicionando feature de ocultar e listar notes ocultadas)
-- Eloise Sophia Lamenha Lins (Fiz com que todo usuário inicie sua conta com 7 eventos já cadastrados)
+- Eloise Sophia Lamenha Lins (Fiz com que um usuário inicie sua conta com 7 eventos já cadastrados)
 - Rony Rangel dos Santos Silva (Instalação das tabelas no banco com 7 individuos, paginação da lista de individuos, criação do botão de ocultar tasks e o de mostrar todas as tasks)
-
 
 ## Semana 4
 - Michael Albuquerque dos Santos (Fiz o item 2 das demanadas da semana 4, que consistia em construir um feature de seguir e deixar de seguir usuarios)
 - Rony Rangel dos Santos Silva ()
+- Eloise Sophia Lamenha Lins (Fiz as demandas que faltaram da semana 3: paginação na aba de Eventos, botão de deletar eventos, item de menu com os eventos deletados)
 
 Link da página do cliente: https://jsp-servlet-baseapp-4kbl.onrender.com
