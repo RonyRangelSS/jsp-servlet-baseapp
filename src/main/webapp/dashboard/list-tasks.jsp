@@ -72,52 +72,44 @@
         <div class="d-flex flex-column col-md-5 ms-5">
             <h1 class="h3 mb-3 fw-normal">Tasks</h1>
             <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Nome da task</th>
-                        <th scope="col">Prioridade</th>
-                        <th scope="col">Foi feita ?</th>
-                        <th scope="col">Visível ? ?</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <%
+                <thead>
+                <tr>
+                    <th scope="col">Nome da task</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <%
                 List<TaskDTO> lista = (List<TaskDTO>) request.getAttribute("lista");
                 for (TaskDTO task : lista) {
                         %>
-                    <tr>
-                        <td>Editar</td>
-                        <td><%= task.getTaskName() %></td>
-                        <td><%= task.getPriority() %></td>
-                        <td><%= task.getCompleted() %></td>
-                        <form method="post">
-                            <input type="hidden" name="taskId" value="<%= task.getUuid() %>" />
-                            <td><button formaction="/dashboard/ocultar-task">Ocultar</button></td>
-                        </form>
-                    </tr>
-                        <% } %>
-                    <tbody/>
+                <tr>
+                    <td><a href="/dashboard/view-task.jsp?taskId=<%= task.getUuid() %>"><%= task.getTaskName() %></a></td>
+                    <form method="post">
+                        <input type="hidden" name="taskId" value="<%= task.getUuid() %>" />
+                        <td><button formaction="/dashboard/ocultar-task">Ocultar</button></td>
+                    </form>
+                </tr>
+                    <% } %>
+                <tbody/>
             <table/>
-            <div class="pagination">
-                <% int currentPage = (int) request.getAttribute("currentPage"); %>
-                <nav aria-label="Navegação de página">
-                    <ul class="pagination">
-                        <li class="page-item <%= currentPage == 1 ? "disabled" : "" %>">
-                            <a class="page-link" href="?page=<%= currentPage - 1 %>">Anterior</a>
-                        </li>
-                        <li class="page-item">
-                            <span class="page-link"><%= currentPage %></span>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=<%= currentPage + 1 %>">Próxima</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <form method="post">
-                <button formaction="/dashboard/show-tasks">Mostrar todas as tasks</button>
-            </form>
+
+                <div class="pagination">
+                    <% int currentPage = (int) request.getAttribute("currentPage");
+                    %>
+                    <nav aria-label="Navegação de página">
+                        <ul class="pagination">
+                            <li class="page-item <%= currentPage == 1 ? "disabled" : "" %>">
+                                <a class="page-link" href="?page=<%= currentPage - 1 %>">Anterior</a>
+                            </li>
+                            <li class="page-item">
+                                <span class="page-link"><%= currentPage %></span>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<%= currentPage + 1 %>">Próxima</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
         </div>
     </div>
 
