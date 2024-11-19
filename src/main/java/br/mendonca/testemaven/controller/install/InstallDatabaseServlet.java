@@ -3,6 +3,7 @@ package br.mendonca.testemaven.controller.install;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.UUID;
 
 import br.mendonca.testemaven.services.InstallService;
 import jakarta.servlet.ServletException;
@@ -35,11 +36,17 @@ public class InstallDatabaseServlet extends HttpServlet {
 			service.deleteTaskTable();
 			msg += "<h2>Delete table task sucessful!</h2>\n";
 
+			service.deleteFollowsTable();
+			msg += "<h2>Deleted table follows sucessful!</h2>\n";
+
 			service.deleteUserTable();
 			msg += "<h2>Delete table user sucessful!</h2>\n";
 
 			service.createUserTable();
 			msg += "<h2>Create table user sucessful!</h2>\n";
+
+			service.createFollowsTable();
+			msg += "<h2>Create table follows sucessful!</h2>\n";
 
 			service.createNoteTable();
 			msg += "<h2>Create table note sucessful!</h2>\n";
@@ -58,6 +65,12 @@ public class InstallDatabaseServlet extends HttpServlet {
 
 			service.populateEvents();
 			msg += "<h2>Populate table events sucessful!</h2>\n";
+
+			UUID userId = service.createSingleUser("Fernando", "fernando@gmail.com", "1234");
+			msg += "<h2>Create user sucessful! Your id is </h2>\n" + userId;
+
+			service.createTasksForUser(userId);
+
 
 			page.println("<html lang='pt-br'><head><title>Teste</title></head><body>");
 			page.println(msg);

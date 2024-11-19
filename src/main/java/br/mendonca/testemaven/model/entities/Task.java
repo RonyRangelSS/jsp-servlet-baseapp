@@ -6,6 +6,7 @@ public class Task {
     private String userId;
     private String taskName;
     private Boolean isCompleted;
+    private Boolean isVisible;
     private Integer priority;
 
     public String getUuid() {
@@ -19,7 +20,7 @@ public class Task {
         return userId;
     }
 
-    public void setUserId(String userID) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -37,6 +38,14 @@ public class Task {
 
     public void setCompleted(Boolean completed) {
         isCompleted = completed;
+    }
+
+    public Boolean getVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(Boolean visible) {
+        isVisible = visible;
     }
 
     public Integer getPriority() {

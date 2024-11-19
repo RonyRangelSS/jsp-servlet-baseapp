@@ -5,8 +5,11 @@ public class Note {
     private String userId;
     private String noteTitle;
     private String noteContent;
+    private boolean isVisible;
     private int date;
     private boolean isDone;
+
+
 
     public String getUuid() {
         return uuid;
@@ -54,6 +57,14 @@ public class Note {
 
     public void setDone(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean isVisible) {
+        this.isVisible = isVisible;
     }
 }
 

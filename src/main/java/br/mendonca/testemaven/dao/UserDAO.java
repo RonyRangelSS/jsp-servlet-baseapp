@@ -1,5 +1,7 @@
 package br.mendonca.testemaven.dao;
 
+import java.util.UUID;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import br.mendonca.testemaven.model.entities.User;
 
@@ -58,7 +61,7 @@ public class UserDAO {
 		PreparedStatement ps = conn.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ?");
 		ps.setString(1, email);
 		ps.setString(2, password);
-		System.out.println(ps); // Exibe no console do Docker a query já montada.
+		System.out.println(ps); // Exibe no console do Docker a query jï¿½ montada.
 		
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
@@ -75,7 +78,7 @@ public class UserDAO {
 		return user;
 	}
 
-	// TODO: Não testado
+	// TODO: Nï¿½o testado
 	public List<User> search(String name) throws ClassNotFoundException, SQLException {
 		ArrayList<User> lista = new ArrayList<User>();
 		
@@ -102,4 +105,74 @@ public class UserDAO {
 		
 		return lista;
 	}
+
+	public void createFollowRelation(String followerId, String followedId) throws ClassNotFoundException, SQLException {
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+
+		PreparedStatement ps = conn.prepareStatement("INSERT INTO follows (followerId, followedId) values (?,?)");
+		ps.setObject(1, UUID.fromString(followerId));
+		ps.setObject(2, UUID.fromString(followedId));
+		ps.execute();
+		ps.close();
+	}
+
+	public void deleteFollowRelation(String followerId, String followedId) throws ClassNotFoundException, SQLException {
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+
+		PreparedStatement ps = conn.prepareStatement("DELETE FROM follows WHERE followerId = ? AND followedId = ?");
+		ps.setObject(1, UUID.fromString(followerId));
+		ps.setObject(2, UUID.fromString(followedId));
+		ps.execute();
+		ps.close();
+	}
+
+	public User getUserById(String userId) throws ClassNotFoundException, SQLException {
+		ArrayList<User> lista = new ArrayList<User>();
+
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM users WHERE uuid = ?");
+		ps.setObject(1, UUID.fromString(userId));
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			User user = new User();
+			user.setUuid(rs.getString("uuid"));
+			user.setName(rs.getString("name"));
+			user.setEmail(rs.getString("email"));
+			user.setPassword(rs.getString("password"));
+
+			lista.add(user);
+		}
+
+		return lista.get(0);
+
+	}
+	public List<User> listFollowingUsers(String followerId) throws ClassNotFoundException, SQLException {
+		ArrayList<User> lista = new ArrayList<User>();
+
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM follows WHERE followerId = ?");
+		ps.setObject(1, UUID.fromString(followerId));
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			User user = new User();
+			String followedId = (rs.getString("followedId"));
+
+			user = getUserById(followedId);
+
+			lista.add(user);
+		}
+
+		rs.close();
+
+		return lista;
+	}
+
 }

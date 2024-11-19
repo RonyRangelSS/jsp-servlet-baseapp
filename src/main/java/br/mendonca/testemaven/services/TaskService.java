@@ -23,6 +23,14 @@ public class TaskService {
         task.setUserId(userId);
 
         dao.register(task);
+        System.out.println("TESTE IMPORTANTE:" + task.getUserId());
+    }
+
+    public TaskDTO getTaskById(String taskId) throws ClassNotFoundException, SQLException {
+        TaskDAO dao = new TaskDAO();
+        TaskDTO task = dao.getTaskById(taskId);
+
+        return task;
     }
 
     public List<TaskDTO> listAllUserTasks(String userId) throws ClassNotFoundException, SQLException {
@@ -30,6 +38,40 @@ public class TaskService {
 
         TaskDAO dao = new TaskDAO();
         List<Task> lista = dao.listAllUserTasks(userId);
+        System.out.println(lista);
+
+        for (Task task : lista) {
+            resp.add(TaskDTO.taskMapper(task));
+        }
+
+        return resp;
+    }
+
+    public List<TaskDTO> listAllUserTasksPagineted(String userId, int offset) throws ClassNotFoundException, SQLException {
+        ArrayList<TaskDTO> resp = new ArrayList<TaskDTO>();
+
+        TaskDAO dao = new TaskDAO();
+        List<Task> lista = dao.listTasksPaginated(userId, offset);
+        System.out.println(lista);
+        int x = 0;
+
+        for (Task task : lista) {
+                resp.add(TaskDTO.taskMapper(task));
+            }
+
+        return resp;
+    }
+
+    public void ocultarTask(String taskId) throws ClassNotFoundException, SQLException {
+        TaskDAO dao = new TaskDAO();
+        dao.ocultarTask(taskId);
+    }
+
+    public List<TaskDTO> listAllDeletedTasksPagineted(String userId, int offset) throws ClassNotFoundException, SQLException {
+        ArrayList<TaskDTO> resp = new ArrayList<TaskDTO>();
+
+        TaskDAO dao = new TaskDAO();
+        List<Task> lista = dao.listDeletedTasksPaginated(userId, offset);
         System.out.println(lista);
 
         for (Task task : lista) {

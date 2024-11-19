@@ -9,6 +9,7 @@ import java.util.List;
 import br.mendonca.testemaven.services.NoteService;
 import br.mendonca.testemaven.services.dto.NoteDTO;
 import br.mendonca.testemaven.services.dto.UserDTO;
+import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.ServletException;
@@ -16,36 +17,41 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/dashboard/notes/page")
-public class ListNotesServlet extends HttpServlet {
+@WebServlet("/dashboard/update-visibility")
+public class UpdateNoteVisibility extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.sendRedirect("/dashboard/add-note.jsp");
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter page = response.getWriter();
+
+        String noteId = request.getParameter("noteId");
         HttpSession session = request.getSession();
         NoteService noteService = new NoteService();
-
 
         int currentPageIndex = Integer.parseInt(request.getParameter("pageIndex"));
         int maxNotesPerPage = 3;
         int offset = (currentPageIndex - 1) * maxNotesPerPage;
 
         try {
+            noteService.updateVisibleField(noteId);
 
             UserDTO user = (UserDTO) session.getAttribute("user");
             String userId = user.getUuid();
             int totalPages = (int) Math.ceil((double) noteService.countUserNotes(userId) / maxNotesPerPage);
 
-
             List<NoteDTO> lista = noteService.listNotesForPagination(userId, maxNotesPerPage, offset);
-
-            System.out.println(lista.size());
 
             request.setAttribute("lista", lista);
             request.setAttribute("totalPages", totalPages);
             request.setAttribute("currentPageIndex", currentPageIndex);
-            request.getRequestDispatcher("list-notes.jsp").forward(request, response);
+            request.getRequestDispatcher("notes/list-notes.jsp").forward(request, response);
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
