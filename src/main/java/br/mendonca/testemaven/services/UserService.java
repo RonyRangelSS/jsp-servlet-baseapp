@@ -44,4 +44,18 @@ public class UserService {
 			System.out.println(e.getMessage());
 		}
 	}
+
+	public List<UserDTO> searchTasks(String searchQuery) throws Exception, SQLException {
+		ArrayList<UserDTO> resp = new ArrayList<UserDTO>();
+
+		UserDAO dao = new UserDAO();
+		List<User> lista = dao.searchUsersByName(searchQuery);
+		System.out.println(lista);
+
+		for (User user : lista) {
+			resp.add(UserDTO.userMapper(user));
+		}
+
+		return resp;
+	}
 }
