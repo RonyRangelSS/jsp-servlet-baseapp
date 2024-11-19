@@ -9,6 +9,7 @@ public class EventDTO {
 	private String eventName;
 	private int date;
 	private Boolean hasPassed;
+	private Boolean isVisible;
 
 	public String getUuid() {
 		return uuid;
@@ -40,6 +41,12 @@ public class EventDTO {
 	public void setHasPassed(Boolean hasPassed) {
 		this.hasPassed = hasPassed;
 	}
+	public Boolean getIsVisible() {
+		return isVisible;
+	}
+	public void setIsVisible(Boolean isVisible) {
+		this.isVisible = isVisible;
+	}
 	
 	
 	public static EventDTO eventMapper(Event event) {
@@ -49,6 +56,7 @@ public class EventDTO {
 		dto.setEventName(event.getEventName());
 		dto.setDate(event.getDate());
 		dto.setHasPassed(event.getHasPassed());
+		dto.setIsVisible(event.getIsVisible());
 		
 		return dto;
 	}

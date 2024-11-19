@@ -7,6 +7,7 @@ public class Event {
 	private String eventName;
 	private int date;
 	private Boolean hasPassed;
+	private Boolean isVisible;
 	
 	public String getUuid() {
 		return uuid;
@@ -37,5 +38,11 @@ public class Event {
 	}
 	public void setHasPassed(Boolean hasPassed) {
 		this.hasPassed = hasPassed;
+	}
+	public Boolean getIsVisible() {
+		return isVisible;
+	}
+	public void setIsVisible(Boolean isVisible) {
+		this.isVisible = isVisible;
 	}
 }

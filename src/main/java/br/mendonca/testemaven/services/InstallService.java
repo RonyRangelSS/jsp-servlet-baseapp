@@ -59,7 +59,8 @@ public class InstallService {
 				+ "    userId UUID REFERENCES users(uuid),"
 				+ "    eventName VARCHAR(255) NOT NULL,"
 				+ "    date INTEGER NOT NULL,"
-				+ "    hasPassed BOOLEAN NOT NULL)");
+				+ "    hasPassed BOOLEAN NOT NULL,"
+				+ "    isVisible BOOLEAN NOT NULL DEFAULT TRUE)");
 	}
 	public void deleteTaskTable() throws ClassNotFoundException, SQLException {
 		statement("DROP TABLE IF EXISTS tasks");
