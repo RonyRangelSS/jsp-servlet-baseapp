@@ -63,37 +63,10 @@
 					<%= event.getEventName() %>
 				</a>
 			</td>
-			<td>
-				<form action="/dashboard/update-event-visibility" method="POST">
-					<input type="hidden" name="eventId" value="<%=event.getUuid() %>" />
-					<button type="submit" class="btn btn-danger">
-						Delete
-					</button>
-				</form>
-			</td>
 		</tr>
 		<% } %>
 		</tbody>
 	</table>
-
-	<div class="pagination">
-		<%
-			int currentPage = (int) request.getAttribute("currentPage");
-		%>
-		<nav aria-label="Navegação de página">
-			<ul class="pagination">
-				<li class="page-item <%= currentPage == 1 ? "disabled" : "" %>">
-					<a class="page-link" href="?page=<%= currentPage - 1 %>">Anterior</a>
-				</li>
-				<li class="page-item">
-					<span class="page-link"><%= currentPage %></span>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="?page=<%= currentPage + 1 %>">Próxima</a>
-				</li>
-			</ul>
-		</nav>
-	</div>
 
 </main>
     

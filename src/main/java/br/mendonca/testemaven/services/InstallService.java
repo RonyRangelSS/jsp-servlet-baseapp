@@ -76,7 +76,8 @@ public class InstallService {
 				+ "    userId UUID REFERENCES users(uuid),"
 				+ "    eventName VARCHAR(255) NOT NULL,"
 				+ "    date INTEGER NOT NULL,"
-				+ "    hasPassed BOOLEAN NOT NULL)");
+				+ "    hasPassed BOOLEAN NOT NULL,"
+				+ "    isVisible BOOLEAN NOT NULL DEFAULT TRUE)");
 	}
 
 	public void deleteTaskTable() throws ClassNotFoundException, SQLException {
@@ -96,12 +97,12 @@ public class InstallService {
 
 	public void insertInitialUser() throws ClassNotFoundException, SQLException {
 		String[] emails = {
-				"michael-alb@hotmail.com",
+				"ewerton@gmail.com",
 		};
 
 		String sql = String.format(
 				"INSERT INTO users (name, email, password) VALUES ('%s', '%s', '%s')",
-				"michael", "michael-alb@hotmail.com", "123"
+				"ewerton", "ewerton@gmail.com", "123"
 		);
 
 		statement(sql);

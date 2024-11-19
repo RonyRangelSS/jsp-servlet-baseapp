@@ -22,18 +22,25 @@ public class ListEventsServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		HttpSession session = request.getSession();
 		PrintWriter page = response.getWriter();
-		EventService eventService = new EventService();
+		HttpSession session = request.getSession();
 		
 		try {
 			UserDTO user = (UserDTO) session.getAttribute("user");
 			String userId = user.getUuid();
 
-			List<EventDTO> lista = eventService.listAllEvent(userId);
+			int pageEvent = 1;
+			int eventsPerPage = 3;
+			if (request.getParameter("page") != null) {
+				pageEvent = Integer.parseInt(request.getParameter("page"));
+			}
+			int offset = (pageEvent - 1) * eventsPerPage;
+			EventService eventService = new EventService();
+			List<EventDTO> lista = eventService.listAllEventPaginated(userId, offset, 3);
 
 			// Anexa � requisi��o um objeto ArrayList e despacha a requisi��o para uma JSP.
 			request.setAttribute("lista", lista);
+			request.setAttribute("currentPage", pageEvent);
 			request.getRequestDispatcher("list-events.jsp").forward(request, response);
 		} catch (Exception e) {
 			// Escreve as mensagens de Exception em uma p�gina de resposta.
@@ -51,20 +58,35 @@ public class ListEventsServlet extends HttpServlet {
 			
 		}
 	}
-	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter page = response.getWriter();
+		HttpSession session = request.getSession();
+		EventService eventService = new EventService();
 		
 		try {
-			// A programa��o do servlet deve ser colocada neste bloco try.
-			// Apague o conte�do deste bloco try e escreva seu c�digo.
-			String parametro = request.getParameter("nomeparametro");
-			
-			page.println("Parametro: " + parametro);
-			page.close();
-			
+			UserDTO user = (UserDTO) session.getAttribute("user");
+			String userId = user.getUuid();
+
+			int pageEvent = 1;
+			int eventsPerPage = 3;
+			if (request.getParameter("page") != null) {
+				pageEvent = Integer.parseInt(request.getParameter("page"));
+			}
+			int offset = (pageEvent - 1) * eventsPerPage;
+
+			String eventName = request.getParameter("eventName");
+			Integer date = Integer.valueOf(request.getParameter("date"));
+			Boolean hasPassed = Boolean.valueOf(request.getParameter("hasPassed"));
+
+			eventService.register(userId, eventName, date, hasPassed);
+
+			List<EventDTO> lista = eventService.listAllEventPaginated(userId, offset, 3);
+
+			request.setAttribute("lista", lista);
+			request.setAttribute("currentPage", pageEvent);
+			request.getRequestDispatcher("list-events.jsp").forward(request, response);
 			
 		} catch (Exception e) {
 			// Escreve as mensagens de Exception em uma p�gina de resposta.
@@ -84,4 +106,5 @@ public class ListEventsServlet extends HttpServlet {
 			
 		}
 	}
+
 }
