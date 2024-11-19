@@ -47,11 +47,11 @@ public class UserService {
 		}
 	}
 
-	public List<UserDTO> searchUsers(String searchQuery) throws Exception, SQLException {
+	public List<UserDTO> searchUsers(String searchQuery, Integer idadeMinima, Integer idadeMaxima, Boolean status) throws Exception, SQLException {
 		ArrayList<UserDTO> resp = new ArrayList<UserDTO>();
 
 		UserDAO dao = new UserDAO();
-		List<User> lista = dao.searchUsersByName(searchQuery);
+		List<User> lista = dao.searchUsersByName(searchQuery, idadeMinima, idadeMaxima, status);
 		System.out.println(lista);
 
 		for (User user : lista) {
