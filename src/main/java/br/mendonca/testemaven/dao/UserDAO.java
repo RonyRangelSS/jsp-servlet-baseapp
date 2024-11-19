@@ -19,10 +19,12 @@ public class UserDAO {
 		Connection conn = ConnectionPostgres.getConexao();
 		conn.setAutoCommit(true);
 		
-		PreparedStatement ps = conn.prepareStatement("INSERT INTO users (name, email, password) values (?,?,?)");
+		PreparedStatement ps = conn.prepareStatement("INSERT INTO users (name, email, password, idade, status) values (?,?,?,?,?)");
 		ps.setString(1, user.getName());
 		ps.setString(2, user.getEmail());
 		ps.setString(3, user.getPassword());
+		ps.setInt(4, user.getIdade());
+		ps.setBoolean(5, user.getStatus());
 		ps.execute();
 		ps.close();
 	}
