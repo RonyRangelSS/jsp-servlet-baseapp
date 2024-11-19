@@ -116,5 +116,28 @@ public class UserDAO {
 		ps.execute();
 		ps.close();
 	}
+	public List<User> searchUsersByName(String searchQuery) throws SQLException, ClassNotFoundException {
+		List<User> users = new ArrayList<>();
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+
+
+		String sql = "SELECT * FROM users WHERE name ILIKE ?";
+		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+			stmt.setString(1, "%" + searchQuery + "%");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				User user = new User();
+				user.setUuid(rs.getString("uuid"));
+				user.setName(rs.getString("name"));
+				user.setEmail(rs.getString("email"));
+				user.setPassword(rs.getString("password"));
+				user.setIdade(rs.getInt("idade"));
+				user.setStatus(rs.getBoolean("status"));
+				users.add(user);
+			}
+		}
+		return users;
+	}
 
 }
