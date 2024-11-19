@@ -20,5 +20,8 @@ Aplicação de gerenciamento de tasks (to do list)
 - Rony Rangel dos Santos Silva (Instalação das tabelas no banco com 7 individuos, paginação da lista de individuos, criação do botão de ocultar tasks e o de mostrar todas as tasks)
 
 
+## Semana 4
+- Michael Albuquerque dos Santos ()
+- Rony Rangel dos Santos Silva ()
 
 Link da página do cliente: https://jsp-servlet-baseapp-4kbl.onrender.com

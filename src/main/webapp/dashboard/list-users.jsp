@@ -61,7 +61,14 @@
 				<td>Editar</td>
 				<td><%= user.getName() %></td>
 				<td><%= user.getEmail() %></td>
-				<td>Apagar</td>
+				<td>
+					<form action="/dashboard/seguir" method="POST">
+						<input type="hidden" name="followedId" value="<%=user.getUuid() %>" />
+						<button type="submit" class="btn btn-danger">
+							Seguir
+						</button>
+					</form>
+				</td>
 			</tr>
 			<% } %>
 			</tbody>
