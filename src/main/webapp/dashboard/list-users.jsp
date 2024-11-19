@@ -49,6 +49,8 @@
 					<th scope="col"></th>
 					<th scope="col">Nome</th>
 					<th scope="col">E-mail</th>
+					<th scope="col">Idade</th>
+					<th scope="col">Status</th>
 					<th scope="col"></th>
 				</tr>
 			</thead>
@@ -61,6 +63,9 @@
 				<td>Editar</td>
 				<td><%= user.getName() %></td>
 				<td><%= user.getEmail() %></td>
+				<td><%= user.getIdade() %></td>
+				<td><%= user.getStatus() %></td>
+
 				<td>
 					<form action="/dashboard/seguir" method="POST">
 						<input type="hidden" name="followedId" value="<%=user.getUuid() %>" />
