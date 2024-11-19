@@ -91,7 +91,8 @@
                 </tr>
                     <% } %>
                 <tbody/>
-                <table/>
+            <table/>
+
                 <div class="pagination">
                     <% int currentPage = (int) request.getAttribute("currentPage");
                     %>
