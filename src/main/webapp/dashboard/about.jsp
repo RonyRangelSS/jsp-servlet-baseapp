@@ -75,7 +75,7 @@ if (session.getAttribute("user") != null) {
 				<tr>
 					<td scope="col">Eloise Sophia Lamenha Lins</th>
 					<td scope="col">Eventos</th>
-					<td scope="col">O usuário pode visualizar uma lista de atividades pelo tempo (timeline) seus e dos outros usuários que cadastraram alguma entidade e curtir a atividade, a atividade na timeline mostra a quantidade de curtidas</th>
+					<td scope="col">4 - O usuário pode visualizar uma lista de atividades pelo tempo (timeline) seus e dos outros usuários que cadastraram alguma entidade e curtir a atividade, a atividade na timeline mostra a quantidade de curtidas</th>
 				</tr>
 			<tbody>
 			</tbody>
