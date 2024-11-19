@@ -21,7 +21,7 @@ Aplicação de gerenciamento de tasks (to do list)
 
 ## Semana 4
 - Michael Albuquerque dos Santos (Fiz o item 2 das demanadas da semana 4, que consistia em construir um feature de seguir e deixar de seguir usuarios)
-- Rony Rangel dos Santos Silva ()
-- Eloise Sophia Lamenha Lins (Fiz as demandas que faltaram da semana 3: paginação na aba de Eventos, botão de deletar eventos, item de menu com os eventos deletados; Fiz o item 1 das demandas da semana 4: adicionei minha regra de negócio no about.jsp)
+- Rony Rangel dos Santos Silva (Fiz o item 3 das demandas da semana 4 (Pesquisar usuários e filtrar por idade e status), adicionei o about e atualizei o readme)
+- Eloise Sophia Lamenha Lins (Fiz as demandas que faltaram da semana 3: paginação na aba de Eventos, botão de deletar eventos, item de menu com os eventos deletados)
 
 Link da página do cliente: https://jsp-servlet-baseapp-4kbl.onrender.com

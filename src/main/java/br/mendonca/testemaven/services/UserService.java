@@ -10,13 +10,15 @@ import br.mendonca.testemaven.services.dto.UserDTO;
 
 public class UserService {
 	
-	public void register(String name, String email, String password) throws ClassNotFoundException, SQLException {
+	public void register(String name, String email, String password, Integer idade, Boolean status) throws ClassNotFoundException, SQLException {
 		UserDAO dao = new UserDAO();
 		
 		User user = new User();
 		user.setName(name);
 		user.setEmail(email);
 		user.setPassword(password);
+		user.setIdade(idade);
+		user.setStatus(status);
 		
 		dao.register(user);
 	}
@@ -52,10 +54,24 @@ public class UserService {
 	}
 
 	public List<UserDTO> listFollowingUsers(String followerId) throws ClassNotFoundException, SQLException {
+        ArrayList<UserDTO> resp = new ArrayList<UserDTO>();
+
+        UserDAO dao = new UserDAO();
+        List<User> lista = dao.listFollowingUsers(followerId);
+
+        for (User user : lista) {
+            resp.add(UserDTO.userMapper(user));
+        }
+
+        return resp;
+    }
+	
+	public List<UserDTO> searchUsers(String searchQuery, Integer idadeMinima, Integer idadeMaxima, Boolean status) throws Exception, SQLException {
 		ArrayList<UserDTO> resp = new ArrayList<UserDTO>();
 
 		UserDAO dao = new UserDAO();
-		List<User> lista = dao.listFollowingUsers(followerId);
+		List<User> lista = dao.searchUsers(searchQuery, idadeMinima, idadeMaxima, status);
+		System.out.println(lista);
 
 		for (User user : lista) {
 			resp.add(UserDTO.userMapper(user));

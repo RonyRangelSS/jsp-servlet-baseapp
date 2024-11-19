@@ -19,10 +19,12 @@ public class UserDAO {
 		Connection conn = ConnectionPostgres.getConexao();
 		conn.setAutoCommit(true);
 		
-		PreparedStatement ps = conn.prepareStatement("INSERT INTO users (name, email, password) values (?,?,?)");
+		PreparedStatement ps = conn.prepareStatement("INSERT INTO users (name, email, password, idade, status) values (?,?,?,?,?)");
 		ps.setString(1, user.getName());
 		ps.setString(2, user.getEmail());
 		ps.setString(3, user.getPassword());
+		ps.setInt(4, user.getIdade());
+		ps.setBoolean(5, user.getStatus());
 		ps.execute();
 		ps.close();
 	}
@@ -42,6 +44,8 @@ public class UserDAO {
 			user.setName(rs.getString("name"));
 			user.setEmail(rs.getString("email"));
 			user.setPassword(rs.getString("password"));
+			user.setIdade(rs.getInt("idade"));
+			user.setStatus(rs.getBoolean("status"));
 			
 			lista.add(user);
 		}
@@ -116,6 +120,44 @@ public class UserDAO {
 		ps.execute();
 		ps.close();
 	}
+	public List<User> searchUsers(String search, Integer idadeMinima, Integer idadeMaxima, Boolean status) throws ClassNotFoundException, SQLException {
+		List<User> users = new ArrayList<>();
+		Connection conn = ConnectionPostgres.getConexao();
+
+		StringBuilder sql = new StringBuilder("SELECT * FROM users WHERE name ILIKE ? AND idade BETWEEN ? AND ?");
+
+
+		if (status != null) {
+			sql.append(" AND status = ?");
+		}
+
+		try (PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
+			stmt.setString(1, "%" + search + "%");
+			stmt.setInt(2, idadeMinima);
+			stmt.setInt(3, idadeMaxima);
+			int index = 4;
+
+			if (status != null) {
+				stmt.setBoolean(index, status);
+			}
+
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				User user = new User();
+				user.setUuid(rs.getString("uuid"));
+				user.setName(rs.getString("name"));
+				user.setEmail(rs.getString("email"));
+				user.setPassword(rs.getString("password"));
+				user.setIdade(rs.getInt("idade"));
+				user.setStatus(rs.getBoolean("status"));
+				users.add(user);
+			}
+		}
+		return users;
+	}
+
+
+
 
 	public void deleteFollowRelation(String followerId, String followedId) throws ClassNotFoundException, SQLException {
 		Connection conn = ConnectionPostgres.getConexao();
