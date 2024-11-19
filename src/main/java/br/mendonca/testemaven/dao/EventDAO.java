@@ -14,12 +14,12 @@ public class EventDAO {
 		Connection conn = ConnectionPostgres.getConexao();
 		conn.setAutoCommit(true);
 		
-		PreparedStatement ps = conn.prepareStatement("INSERT INTO events (userId, eventName, date, hasPassed, isVisible) values (?,?,?,?)");
+		PreparedStatement ps = conn.prepareStatement("INSERT INTO events (userId, eventName, date, hasPassed, isVisible) values (?,?,?,?,?)");
 		ps.setObject(1, UUID.fromString(event.getUserId()));
 		ps.setString(2, event.getEventName());
 		ps.setInt(3, event.getDate());
 		ps.setBoolean(4, event.getHasPassed());
-		ps.setBoolean(5, event.getIsVisible());
+		ps.setBoolean(5, true);
 		ps.execute();
 		ps.close();
 	}
@@ -40,6 +40,7 @@ public class EventDAO {
 			event.setEventName(rs.getString("eventName"));
 			event.setDate(rs.getInt("date"));
 			event.setHasPassed(rs.getBoolean("hasPassed"));
+			event.setIsVisible(rs.getBoolean("isVisible"));
 			
 			lista.add(event);
 		}

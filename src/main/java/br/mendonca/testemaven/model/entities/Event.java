@@ -42,7 +42,5 @@ public class Event {
 	public Boolean getIsVisible() {
 		return isVisible;
 	}
-	public void setIsVisible(Boolean isVisible) {
-		this.isVisible = isVisible;
-	}
+	public void setIsVisible(Boolean isVisible) { this.isVisible = isVisible; }
 }
