@@ -33,6 +33,7 @@
 				<input type="checkbox" name="status" value="true">
 				<label for="floatingInput">Status</label>
 			</div>
+			<br/>
     		<button class="btn btn-primary w-100 py-2 mt-2">Cadastrar-se</button>
     	</form>
     </main>

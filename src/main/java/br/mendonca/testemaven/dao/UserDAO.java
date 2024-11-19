@@ -120,20 +120,28 @@ public class UserDAO {
 		ps.execute();
 		ps.close();
 	}
-	public List<User> searchUsersByName(String searchQuery, Integer idadeMinima, Integer idadeMaxima, Boolean status ) throws SQLException, ClassNotFoundException {
+	public List<User> searchUsers(String search, Integer idadeMinima, Integer idadeMaxima, Boolean status) throws ClassNotFoundException, SQLException {
 		List<User> users = new ArrayList<>();
 		Connection conn = ConnectionPostgres.getConexao();
-		conn.setAutoCommit(true);
+
+		StringBuilder sql = new StringBuilder("SELECT * FROM users WHERE name ILIKE ? AND idade BETWEEN ? AND ?");
 
 
-		String sql = "SELECT * FROM users WHERE name ILIKE ? AND idade BETWEEN ? AND ? AND status=?";
-		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-			stmt.setString(1, "%" + searchQuery + "%");
+		if (status != null) {
+			sql.append(" AND status = ?");
+		}
+
+		try (PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
+			stmt.setString(1, "%" + search + "%");
 			stmt.setInt(2, idadeMinima);
 			stmt.setInt(3, idadeMaxima);
-			stmt.setBoolean(4, status);
-			ResultSet rs = stmt.executeQuery();
+			int index = 4;
 
+			if (status != null) {
+				stmt.setBoolean(index, status);
+			}
+
+			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				User user = new User();
 				user.setUuid(rs.getString("uuid"));
@@ -147,6 +155,7 @@ public class UserDAO {
 		}
 		return users;
 	}
+
 
 
 

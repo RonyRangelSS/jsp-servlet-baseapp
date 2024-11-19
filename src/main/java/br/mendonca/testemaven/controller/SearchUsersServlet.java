@@ -20,14 +20,31 @@ public class SearchUsersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter page = response.getWriter();
+        // Recupera os parâmetros do request
         String search = request.getParameter("search");
+        String idadeMinimaStr = request.getParameter("idadeMinima");
+        String idadeMaximaStr = request.getParameter("idadeMaxima");
+        String statusStr = request.getParameter("status");
+
+        // Define valores padrão ou converte os valores recebidos
+        search = (search == null) ? "" : search;
+
+        Integer idadeMinima = (idadeMinimaStr != null && !idadeMinimaStr.isEmpty())
+                ? Integer.parseInt(idadeMinimaStr)
+                : 0;
+
+        Integer idadeMaxima = (idadeMaximaStr != null && !idadeMaximaStr.isEmpty())
+                ? Integer.parseInt(idadeMaximaStr)
+                : 150;
+
+        Boolean status = (statusStr != null && !statusStr.isEmpty())
+                ? Boolean.parseBoolean(statusStr)
+                : null;
+
         UserService userService = new UserService();
-        if (search == null) {
-            search = "";
-        }
 
         try {
-            List<UserDTO> lista = userService.searchUsers(search);
+            List<UserDTO> lista = userService.searchUsers(search, idadeMinima, idadeMaxima, status);
 
             request.setAttribute("lista", lista);
             request.getRequestDispatcher("list-users.jsp").forward(request, response);

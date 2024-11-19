@@ -39,11 +39,32 @@
 				</div>
 			</div>
 		</nav>
+			<form method="get" action="user-search">
+			<div>
+				<div>
+					<input type="text" name="search" placeholder="Search tasks..." />
+				</div>
 
-		<form method="get" action="user-search">
-			<input type="text" name="search" placeholder="Search tasks..." />
-			<button type="submit">Search</button>
+			<div>
+				<label> Idade Mínima:</label>
+				<input type="number" id="minAge" name="idadeMinima" min="0" />
+			</div>
+
+			<div>
+				<label>Idade Máxima:</label>
+				<input type="number" id="maxAge" name="idadeMaxima" min="0" />
+			</div>
+
+			<div>
+				<label for="status">Ativo:</label>
+				<input type="checkbox" id="status" name="status" value="true" />
+			</div>
+
+				<button type="submit">Buscar</button>
+
+		</div>
 		</form>
+
 
 
     	<h1 class="h3 mb-3 fw-normal">Usuários</h1>

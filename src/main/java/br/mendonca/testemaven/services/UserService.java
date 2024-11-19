@@ -51,7 +51,7 @@ public class UserService {
 		ArrayList<UserDTO> resp = new ArrayList<UserDTO>();
 
 		UserDAO dao = new UserDAO();
-		List<User> lista = dao.searchUsersByName(searchQuery, idadeMinima, idadeMaxima, status);
+		List<User> lista = dao.searchUsers(searchQuery, idadeMinima, idadeMaxima, status);
 		System.out.println(lista);
 
 		for (User user : lista) {
