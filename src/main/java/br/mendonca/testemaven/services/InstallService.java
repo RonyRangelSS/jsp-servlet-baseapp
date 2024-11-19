@@ -34,7 +34,9 @@ public class InstallService {
 				+ "    uuid UUID PRIMARY KEY DEFAULT gen_random_uuid(),"
 				+ "    name VARCHAR(255) NOT NULL,"
 				+ "    email VARCHAR(255) NOT NULL,"
-				+ "    password VARCHAR(255) NOT NULL)");
+				+ "    password VARCHAR(255) NOT NULL),"
+				+ "    idade INTEGER NOT NULL),"
+				+ "    status BOOLEAN NOT NULL)");
 	}
 
 	public void createFollowsTable() throws ClassNotFoundException, SQLException {
