@@ -37,42 +37,71 @@
 						<a class="btn btn-success" href="/auth/logoff">Logoff</a>
 					</span>
 			</div>
+		</nav>
+			<form method="get" action="user-search">
+			<div>
+				<div>
+					<input type="text" name="search" placeholder="Search tasks..." />
+				</div>
+
+			<div>
+				<label> Idade Mínima:</label>
+				<input type="number" id="minAge" name="idadeMinima" min="0" />
+			</div>
+
+			<div>
+				<label>Idade Máxima:</label>
+				<input type="number" id="maxAge" name="idadeMaxima" min="0" />
+			</div>
+
+			<div>
+				<label for="status">Ativo:</label>
+				<input type="checkbox" id="status" name="status" value="true" />
+			</div>
+
+				<button type="submit">Buscar</button>
+
 		</div>
-	</nav>
+		</form>
 
 
 
-	<h1 class="h3 mb-3 fw-normal">Usuários</h1>
-	<table class="table">
-		<thead>
-		<tr>
-			<th scope="col"></th>
-			<th scope="col">Nome</th>
-			<th scope="col">E-mail</th>
-			<th scope="col"></th>
-		</tr>
-		</thead>
-		<tbody>
-		<%
+    	<h1 class="h3 mb-3 fw-normal">Usuários</h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col"></th>
+					<th scope="col">Nome</th>
+					<th scope="col">E-mail</th>
+					<th scope="col">Idade</th>
+					<th scope="col">Status</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+			<%
 			List<UserDTO> lista = (List<UserDTO>) request.getAttribute("lista");
 			for (UserDTO user : lista) {
-		%>
-		<tr>
-			<td>Editar</td>
-			<td><%= user.getName() %></td>
-			<td><%= user.getEmail() %></td>
-			<td>
-				<form action="/dashboard/seguir" method="POST">
-					<input type="hidden" name="followedId" value="<%=user.getUuid() %>" />
-					<button type="submit" class="btn btn-danger">
-						Seguir
-					</button>
-				</form>
-			</td>
-		</tr>
-		<% } %>
-		</tbody>
-	</table>
+			%>
+			<tr>
+				<td>Editar</td>
+				<td><%= user.getName() %></td>
+				<td><%= user.getEmail() %></td>
+				<td><%= user.getIdade() %></td>
+				<td><%= user.getStatus() %></td>
+
+				<td>
+					<form action="/dashboard/seguir" method="POST">
+						<input type="hidden" name="followedId" value="<%=user.getUuid() %>" />
+						<button type="submit" class="btn btn-danger">
+							Seguir
+						</button>
+					</form>
+				</td>
+			</tr>
+			<% } %>
+			</tbody>
+		</table>
 
 
 </main>
