@@ -21,7 +21,7 @@ Aplicação de gerenciamento de tasks (to do list)
 
 
 ## Semana 4
-- Michael Albuquerque dos Santos ()
+- Michael Albuquerque dos Santos (Fiz o item 2 das demanadas da semana 4, que consistia em construir um feature de seguir e deixar de seguir usuarios)
 - Rony Rangel dos Santos Silva ()
 
 Link da página do cliente: https://jsp-servlet-baseapp-4kbl.onrender.com
