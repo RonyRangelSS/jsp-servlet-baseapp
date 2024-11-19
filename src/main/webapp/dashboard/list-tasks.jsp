@@ -39,10 +39,6 @@
             </div>
         </div>
     </nav>
-    <form method="get" action="task-search">
-        <input type="text" name="query" placeholder="Search tasks..." />
-        <button type="submit">Search</button>
-    </form>
 
     <div class="d-flex flex-row h-auto">
         <div d-flex flex-col col-md-4 me-5>

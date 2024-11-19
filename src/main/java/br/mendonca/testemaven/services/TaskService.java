@@ -26,6 +26,13 @@ public class TaskService {
         System.out.println("TESTE IMPORTANTE:" + task.getUserId());
     }
 
+    public TaskDTO getTaskById(String taskId) throws ClassNotFoundException, SQLException {
+        TaskDAO dao = new TaskDAO();
+        TaskDTO task = dao.getTaskById(taskId);
+
+        return task;
+    }
+
     public List<TaskDTO> listAllUserTasks(String userId) throws ClassNotFoundException, SQLException {
         ArrayList<TaskDTO> resp = new ArrayList<TaskDTO>();
 

@@ -44,21 +44,18 @@
     <table class="table">
         <thead>
         <tr>
-            <th scope="col"></th>
             <th scope="col">Task Name</th>
             <th scope="col">Prioridade</th>
-            <th scope="col">Visibilidade</th>
             <th scope="col">Foi feita ?</th>
         </tr>
         </thead>
         <tbody>
             <% TaskService taskService = new TaskService();
+            TaskDTO task = taskService.getTaskById(request.getParameter("taskId"));
                         %>
         <tr>
-            <td>Editar</td>
             <td><%= task.getTaskName() %></td>
             <td><%= task.getPriority() %></td>
-            <td><%= task.getVisible() %></td>
             <td><%= task.getCompleted() %></td>
         </tr>
         <tbody/>

@@ -1,6 +1,8 @@
 package br.mendonca.testemaven.dao;
 
 import br.mendonca.testemaven.model.entities.Task;
+import br.mendonca.testemaven.services.dto.TaskDTO;
+
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -24,6 +26,29 @@ public class TaskDAO {
         System.out.println("#######################################");
         System.out.println(task.getUserId());
         System.out.println("#######################################");
+    }
+
+    public TaskDTO getTaskById(String uuid) throws ClassNotFoundException, SQLException {
+        TaskDTO task = new TaskDTO();
+
+        Connection conn = ConnectionPostgres.getConexao();
+        conn.setAutoCommit(true);
+
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM tasks WHERE uuid = ?");
+        ps.setObject(1, UUID.fromString(uuid));
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            task.setUuid(rs.getString("uuid"));
+            task.setTaskName(rs.getString("taskName"));
+            task.setCompleted(rs.getBoolean("isCompleted"));
+            task.setVisible(rs.getBoolean("isVisible"));
+            task.setPriority(rs.getInt("priority"));
+            task.setUserId(rs.getString("userId"));
+        }
+        rs.close();
+
+        return task;
     }
 
     public List<Task> listAllUserTasks(String userId) throws ClassNotFoundException, SQLException {
