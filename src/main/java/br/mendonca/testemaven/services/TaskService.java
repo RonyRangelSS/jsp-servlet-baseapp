@@ -23,7 +23,7 @@ public class TaskService {
         task.setUserId(userId);
 
         dao.register(task);
-        System.out.println("TESTE IMPORTTANTE:" + task.getUserId());
+        System.out.println("TESTE IMPORTANTE:" + task.getUserId());
     }
 
     public List<TaskDTO> listAllUserTasks(String userId) throws ClassNotFoundException, SQLException {
@@ -49,13 +49,8 @@ public class TaskService {
         int x = 0;
 
         for (Task task : lista) {
-            if (task.getVisible() == true) {
                 resp.add(TaskDTO.taskMapper(task));
             }
-            
-            
-        }
-        System.out.println(x);
 
         return resp;
     }
