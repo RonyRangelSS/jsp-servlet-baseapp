@@ -57,4 +57,9 @@ public class EventService {
 		return resp;
 	}
 
+	public void updateIsVisibleField(String eventId) throws ClassNotFoundException, SQLException {
+		EventDAO dao = new EventDAO();
+		dao.updateIsVisibleField(eventId);
+	}
+
 }

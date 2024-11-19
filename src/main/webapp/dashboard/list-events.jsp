@@ -57,14 +57,21 @@
 			for (EventDTO event : lista) {
 			%>
 			<tr>
-				<td>Editar</td>
 				<td>
 					<a href="view-event.jsp?eventId=<%=event.getUuid()%>" class="text-decoration-none">
 						<%= event.getEventName() %>
 					</a>
 				</td>
-				<td>Apagar</td>
+				<td>
+					<form action="/dashboard/update-event-visibility" method="POST">
+						<input type="hidden" name="eventId" value="<%=event.getUuid() %>" />
+						<button type="submit" class="btn btn-danger">
+							Delete
+						</button>
+					</form>
+				</td>
 			</tr>
+
 			<% } %>
 			</tbody>
 		</table>

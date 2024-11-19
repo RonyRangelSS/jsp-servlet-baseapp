@@ -92,9 +92,26 @@ public class EventDAO {
 			event.setDate(rs.getInt("date"));
 			event.setHasPassed(rs.getBoolean("hasPassed"));
 			event.setIsVisible(rs.getBoolean("isVisible"));
-			lista.add(event);
+
+			if (event.getIsVisible() == true) {
+				lista.add(event);
+			}
 		}
 		rs.close();
 		return lista;
 	}
+
+	public void updateIsVisibleField(String eventId) throws ClassNotFoundException, SQLException {
+		Connection conn = ConnectionPostgres.getConexao();
+		conn.setAutoCommit(true);
+
+		Event event = this.getEventById(eventId);
+
+		PreparedStatement ps = conn.prepareStatement("UPDATE events SET isVisible = ? WHERE uuid = ?");
+		ps.setBoolean(1, !event.getIsVisible());
+		ps.setObject(2, UUID.fromString(eventId));
+		ps.executeUpdate();
+		ps.close();
+	}
+
 }
